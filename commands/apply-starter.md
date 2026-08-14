@@ -1,7 +1,7 @@
 ---
 description: Apply a language starter (git-ignored CLAUDE.md + framework lock) to the current project
 argument-hint: <stack> [--framework <name>]
-allowed-tools: Bash(*/claude-starters/bin/apply-starter.sh:*)
+allowed-tools: Bash(~/claude-starters/bin/apply-starter.sh:*)
 ---
 
 Run the applier for the current working directory:
