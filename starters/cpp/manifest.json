@@ -1,0 +1,14 @@
+{
+  "stack": "cpp",
+  "plugin": null,
+  "frameworks": ["none", "qt", "cli"],
+  "standard": "c++20",
+  "package_manager": "cpm",
+  "commands": {
+    "configure": "cmake --preset default",
+    "build": "cmake --build --preset default",
+    "test": "ctest --preset default",
+    "format": "clang-format -i",
+    "lint": "clang-tidy"
+  }
+}
