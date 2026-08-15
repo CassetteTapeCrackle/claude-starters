@@ -13,6 +13,7 @@ test_cpp_template_tokens_and_rules() {
   assert_contains "$c" "clang-tidy" "lint via clang-tidy"
   assert_contains "$c" "ASan" "sanitizers"
   assert_contains "$c" "Catch2" "Catch2 tests"
+  assert_contains "$c" "clean-code-cpp" "invokes clean-code-cpp skill"
 }
 
 test_cpp_manifest_valid() {

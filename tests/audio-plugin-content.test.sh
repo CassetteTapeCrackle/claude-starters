@@ -17,6 +17,8 @@ test_audio_template_tokens_and_rules() {
   assert_contains "$c" "UI approach" "UI-approach lock"
   assert_contains "$c" "TROUBLESHOOTING" "gotcha capture"
   assert_contains "$c" "Catch2" "golden-buffer tests via Catch2"
+  assert_contains "$c" "clean-code-cpp" "invokes clean-code-cpp skill"
+  assert_contains "$c" "clean-code-audio" "invokes clean-code-audio skill"
 }
 
 test_audio_manifest_valid() {
