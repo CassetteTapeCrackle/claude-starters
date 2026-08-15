@@ -1,0 +1,11 @@
+{
+  "stack": "terraform",
+  "plugin": null,
+  "frameworks": ["none"],
+  "commands": {
+    "format": "terraform fmt -recursive",
+    "validate": "terraform validate",
+    "lint": "tflint",
+    "plan": "terraform plan"
+  }
+}

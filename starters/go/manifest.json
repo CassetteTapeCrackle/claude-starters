@@ -1,0 +1,13 @@
+{
+  "stack": "go",
+  "plugin": null,
+  "frameworks": ["none", "stdlib-http", "gin", "echo"],
+  "skill": "clean-code-go",
+  "commands": {
+    "build": "go build ./...",
+    "test": "go test ./...",
+    "vet": "go vet ./...",
+    "lint": "golangci-lint run",
+    "format": "gofmt -w ."
+  }
+}

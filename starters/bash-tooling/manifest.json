@@ -1,0 +1,11 @@
+{
+  "stack": "bash-tooling",
+  "plugin": null,
+  "frameworks": ["none"],
+  "skill": "clean-code-bash",
+  "commands": {
+    "lint": "shellcheck **/*.sh",
+    "test": "bats tests/",
+    "format": "shfmt -w ."
+  }
+}
