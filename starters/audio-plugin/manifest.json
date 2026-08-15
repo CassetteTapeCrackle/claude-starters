@@ -1,0 +1,18 @@
+{
+  "stack": "audio-plugin",
+  "plugin": null,
+  "frameworks": ["juce"],
+  "standard": "c++17",
+  "package_manager": "cpm",
+  "juce_version": "9",
+  "ui_approaches": ["juce-components", "webview", "visage"],
+  "formats": ["VST3", "AU", "Standalone"],
+  "commands": {
+    "configure": "cmake -B build -DCMAKE_BUILD_TYPE=Debug",
+    "build": "cmake --build build",
+    "test": "ctest --test-dir build",
+    "validate": "pluginval --strictness-level 8",
+    "format": "clang-format -i",
+    "lint": "clang-tidy"
+  }
+}
