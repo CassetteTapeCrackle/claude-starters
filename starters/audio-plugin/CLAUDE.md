@@ -33,6 +33,9 @@ UI approach: <choose ONE at Design time: JUCE Components | WebView | Visage> —
 ## When a JUCE/DSP gotcha is solved
 - Save it to auto-memory AND append it to a project-local `TROUBLESHOOTING.md`, so it isn't re-debugged.
 
+## Depth
+- When writing C++/DSP here, use the `clean-code-cpp` and `clean-code-audio` skills. Name them explicitly.
+
 ## Commands
 - Configure: cmake -B build -DCMAKE_BUILD_TYPE=Debug
 - Build:     cmake --build build

@@ -16,6 +16,9 @@ Framework: __FRAMEWORK__ — locked. Do not introduce alternative frameworks wit
 - A Debug build with ASan + UBSan; run tests under it.
 - Catch2. Cover new functions; add a regression test for every bug.
 
+## Depth
+- When writing or reviewing C++, use the `clean-code-cpp` skill (ownership, noexcept/constexpr, span/string_view, error-handling). Name it explicitly.
+
 ## Commands
 - Configure: cmake --preset default
 - Build:     cmake --build --preset default
