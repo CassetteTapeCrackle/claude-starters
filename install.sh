@@ -12,6 +12,12 @@ for s in "$SRC"/skills/*/; do
   ln -sfn "${s%/}" "$DEST/skills/$(basename "$s")"
 done
 
+mkdir -p "$DEST/agents"
+for a in "$SRC"/agents/*.md; do
+  [ -e "$a" ] || continue
+  ln -sf "$a" "$DEST/agents/$(basename "$a")"
+done
+
 BLOCK_BEGIN="<!-- claude-starters:begin -->"
 BLOCK_END="<!-- claude-starters:end -->"
 GCLAUDE="$DEST/CLAUDE.md"; touch "$GCLAUDE"
