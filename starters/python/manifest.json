@@ -1,0 +1,6 @@
+{
+  "stack": "python",
+  "plugin": null,
+  "frameworks": ["fastapi", "django", "flask", "cli", "none"],
+  "commands": { "test": "pytest -q", "lint": "ruff check .", "format": "ruff format ." }
+}
