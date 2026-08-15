@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 _TESTS_FAILED=0
 assert_eq()       { [ "$1" = "$2" ] || { echo "FAIL: $3 (expected '$1', got '$2')"; _TESTS_FAILED=1; }; }
 assert_contains() { case "$1" in *"$2"*) ;; *) echo "FAIL: $3 (missing '$2')"; _TESTS_FAILED=1;; esac; }
