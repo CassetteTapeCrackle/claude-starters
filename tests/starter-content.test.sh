@@ -14,6 +14,7 @@ test_template_has_core_rules() {
   assert_contains "$c" "ruff" "mentions ruff"
   assert_contains "$c" "pytest" "mentions pytest"
   assert_contains "$c" "type hints" "requires type hints"
+  assert_contains "$c" "clean-code-python" "invokes clean-code-python skill"
 }
 
 test_manifest_is_valid_json() {

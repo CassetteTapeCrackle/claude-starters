@@ -1,0 +1,15 @@
+{
+  "stack": "c",
+  "plugin": null,
+  "frameworks": ["none", "cli"],
+  "standard": "c11",
+  "package_manager": "cpm",
+  "skill": "clean-code-c",
+  "commands": {
+    "configure": "cmake -B build -DCMAKE_BUILD_TYPE=Debug",
+    "build": "cmake --build build",
+    "test": "ctest --test-dir build",
+    "format": "clang-format -i",
+    "lint": "clang-tidy"
+  }
+}

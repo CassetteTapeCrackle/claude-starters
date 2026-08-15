@@ -13,6 +13,9 @@ Framework: __FRAMEWORK__ — locked. Do not introduce alternative frameworks wit
 - Aim for a healthy test-to-code ratio on the core logic — not a fixed
   number, and not on glue/IO you'd test with fixtures instead.
 
+## Depth
+- When writing or reviewing Python, use the `clean-code-python` skill. Name it explicitly.
+
 ## Commands
 - Test: `pytest -q`
 - Lint: `ruff check .`

@@ -1,0 +1,10 @@
+{
+  "stack": "docker",
+  "plugin": null,
+  "frameworks": ["none"],
+  "commands": {
+    "lint": "hadolint Dockerfile",
+    "build": "docker build -t app .",
+    "scan": "trivy image app"
+  }
+}

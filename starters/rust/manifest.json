@@ -1,0 +1,13 @@
+{
+  "stack": "rust",
+  "plugin": null,
+  "frameworks": ["none", "cli", "axum"],
+  "edition": "2021",
+  "skill": "clean-code-rust",
+  "commands": {
+    "build": "cargo build",
+    "test": "cargo test",
+    "lint": "cargo clippy -- -D warnings",
+    "format": "cargo fmt"
+  }
+}
