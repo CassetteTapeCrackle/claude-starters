@@ -1,0 +1,12 @@
+{
+  "stack": "tauri",
+  "plugin": null,
+  "frameworks": ["react", "svelte", "vue", "vanilla"],
+  "package_manager": "pnpm",
+  "skills": ["clean-code-rust", "clean-code-ts"],
+  "commands": {
+    "dev": "pnpm tauri dev",
+    "build": "pnpm tauri build",
+    "test": "cargo test && pnpm test"
+  }
+}

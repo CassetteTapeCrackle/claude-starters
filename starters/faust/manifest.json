@@ -1,0 +1,10 @@
+{
+  "stack": "faust",
+  "plugin": null,
+  "frameworks": ["none"],
+  "skill": "clean-code-audio",
+  "commands": {
+    "build": "faustcmake",
+    "check": "faust -svg"
+  }
+}
