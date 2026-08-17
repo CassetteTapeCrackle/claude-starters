@@ -1,0 +1,13 @@
+{
+  "stack": "electron",
+  "plugin": null,
+  "frameworks": ["react", "svelte", "vue", "vanilla"],
+  "package_manager": "pnpm",
+  "skill": "clean-code-ts",
+  "commands": {
+    "dev": "pnpm dev",
+    "build": "pnpm build",
+    "test": "pnpm test",
+    "lint": "pnpm lint"
+  }
+}

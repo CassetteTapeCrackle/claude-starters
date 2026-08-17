@@ -23,12 +23,15 @@ git-ignored `CLAUDE.md`:
     /apply-starter web-ts --path frontend
 
 ## Starters
-python · cpp · audio-plugin · rust · go · c · bash-tooling ·
-python-cli · python-data · terraform · docker
+**Languages:** python · cpp · c · rust · go · bash-tooling · python-cli · python-data
+**Web/backend:** web-ts · node-api · electron · tauri
+**Audio:** audio-plugin · audio-app · web-audio · audio-external (max/pd) · faust
+**Mobile/desktop:** swiftui · android · flutter
+**ML/infra:** python-ml · terraform · docker
 
 ## Depth skills (auto-fire on relevant code, ~free at rest)
 clean-code-cpp · clean-code-audio · clean-code-rust · clean-code-go ·
-clean-code-python · clean-code-bash · clean-code-c
+clean-code-python · clean-code-bash · clean-code-c · clean-code-ts
 
 ## Agents
 starter-author (scaffold a new starter) · dep-auditor (dependency hygiene)

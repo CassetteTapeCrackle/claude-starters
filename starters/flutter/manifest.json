@@ -1,0 +1,11 @@
+{
+  "stack": "flutter",
+  "plugin": null,
+  "frameworks": ["riverpod", "bloc", "provider"],
+  "commands": {
+    "run": "flutter run",
+    "test": "flutter test",
+    "analyze": "flutter analyze",
+    "format": "dart format ."
+  }
+}

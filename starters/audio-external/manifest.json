@@ -1,0 +1,13 @@
+{
+  "stack": "audio-external",
+  "plugin": null,
+  "frameworks": ["max", "puredata"],
+  "standard": "c11",
+  "skills": ["clean-code-c", "clean-code-audio"],
+  "commands": {
+    "configure": "cmake -B build -DCMAKE_BUILD_TYPE=Debug",
+    "build": "cmake --build build",
+    "test": "ctest --test-dir build",
+    "format": "clang-format -i"
+  }
+}

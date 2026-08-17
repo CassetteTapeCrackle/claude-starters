@@ -1,0 +1,11 @@
+{
+  "stack": "swiftui",
+  "plugin": null,
+  "frameworks": ["none"],
+  "commands": {
+    "build": "xcodebuild build",
+    "test": "xcodebuild test",
+    "lint": "swiftlint",
+    "format": "swift-format -i"
+  }
+}

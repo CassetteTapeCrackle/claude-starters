@@ -1,0 +1,14 @@
+{
+  "stack": "web-ts",
+  "plugin": null,
+  "frameworks": ["react", "svelte", "vue", "solid", "vanilla"],
+  "package_manager": "pnpm",
+  "skill": "clean-code-ts",
+  "commands": {
+    "dev": "pnpm dev",
+    "build": "pnpm build",
+    "test": "pnpm test",
+    "lint": "pnpm lint",
+    "typecheck": "pnpm tsc --noEmit"
+  }
+}

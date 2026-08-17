@@ -1,0 +1,13 @@
+{
+  "stack": "web-audio",
+  "plugin": null,
+  "frameworks": ["audioworklet-wasm"],
+  "package_manager": "pnpm",
+  "dsp_lang": "cpp-emscripten",
+  "skills": ["clean-code-cpp", "clean-code-audio", "clean-code-ts"],
+  "commands": {
+    "dev": "pnpm dev",
+    "build": "pnpm build",
+    "test": "pnpm test"
+  }
+}

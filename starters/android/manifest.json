@@ -1,0 +1,10 @@
+{
+  "stack": "android",
+  "plugin": null,
+  "frameworks": ["none"],
+  "commands": {
+    "build": "./gradlew assembleDebug",
+    "test": "./gradlew test",
+    "lint": "./gradlew ktlintCheck detekt"
+  }
+}
