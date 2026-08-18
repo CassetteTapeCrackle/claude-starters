@@ -1,8 +1,4 @@
 rt-safety-auditor
 dsp-golden-test-author
-pluginval-runner
-preset-roundtrip-tester
-latency-reporter
 parameter-smoothing-auditor
 plugin-ideator
-plugin-ui-designer
