@@ -62,6 +62,10 @@ while [ "$#" -gt 0 ]; do
   esac
 done
 
+case "$subpath" in
+  /*)    echo "error: --path must be relative, got '$subpath'" >&2; exit 2 ;;
+  *..*)  echo "error: --path must not contain '..', got '$subpath'" >&2; exit 2 ;;
+esac
 target_dir="$PWD/$subpath"
 state="$target_dir/.claude/.starter-state"
 
@@ -76,7 +80,14 @@ if [ -z "$framework" ]; then framework="none"; fi
 template="$STARTERS_DIR/$stack/CLAUDE.md"
 if [ ! -f "$template" ]; then echo "error: unknown stack '$stack' (no $template)" >&2; exit 1; fi
 
-render() { sed "s|__FRAMEWORK__|$framework|g" "$template"; }
+# Literal token substitution (no regex / no special-char interpretation of $framework).
+render() {
+  awk -v fw="$framework" -v tok="__FRAMEWORK__" '
+    { line=$0; out=""; i=index(line, tok)
+      while (i > 0) { out = out substr(line,1,i-1) fw; line = substr(line, i+length(tok)); i=index(line, tok) }
+      print out line }
+  ' "$template"
+}
 
 # --print: render to stdout, no writes.
 if [ "$printonly" -eq 1 ]; then render; exit 0; fi
@@ -100,7 +111,7 @@ if [ "$dry" -eq 1 ]; then
   else
     echo "[dry-run] agents: (skipped, --no-agents)"
   fi
-  echo "[dry-run] git-exclude: /${rel}CLAUDE.md and /${rel}.claude/agents/"
+  echo "[dry-run] git-exclude: /${rel}CLAUDE.md, /${rel}CLAUDE.md.bak, /${rel}.claude/"
   exit 0
 fi
 
@@ -127,8 +138,8 @@ write_fresh() {
 
 if [ "$update" -eq 1 ]; then
   if [ ! -f "$target" ]; then echo "error: nothing to update (no $target)" >&2; exit 3; fi
-  if ! grep -qF "$RULES_BEGIN" "$target"; then
-    echo "error: $target has no claude-starters managed block; refusing to touch a hand-written CLAUDE.md." >&2
+  if ! grep -qF "$RULES_BEGIN" "$target" || ! grep -qF "$RULES_END" "$target"; then
+    echo "error: $target has no complete claude-starters managed block (needs both begin and end markers); refusing to touch it. Nothing changed." >&2
     exit 3
   fi
   rules_tmp="$(mktemp)"; render > "$rules_tmp"
@@ -143,10 +154,18 @@ if [ "$update" -eq 1 ]; then
   printf '%s\t%s\n' "$stack" "$framework" > "$state"
 elif [ -e "$target" ]; then
   if [ "$add" -eq 1 ]; then
+    if grep -qF "## Starter rules: $stack (appended" "$target"; then
+      echo "note: '$stack' rules already appended to $target; nothing to do." >&2
+      exit 0
+    fi
     { printf '\n\n---\n\n## Starter rules: %s (appended by claude-starters)\n' "$stack"; render | tail -n +2; } >> "$target"
     mkdir -p "$target_dir/.claude"
     printf '%s\n' "$stack" >> "$target_dir/.claude/.starter-applied"
   elif [ "$force" -eq 1 ]; then
+    if [ -e "$target.bak" ]; then
+      echo "error: $target.bak already exists; refusing to overwrite a backup (that would lose the original). Remove or rename it first." >&2
+      exit 3
+    fi
     cp "$target" "$target.bak"
     write_fresh
   else
@@ -164,7 +183,7 @@ if git -C "$target_dir" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
   gitdir="$(git -C "$target_dir" rev-parse --absolute-git-dir)"
   prefix="$(git -C "$target_dir" rev-parse --show-prefix)"
   exclude="$gitdir/info/exclude"; mkdir -p "$(dirname "$exclude")"
-  for line in "/${prefix}CLAUDE.md" "/${prefix}.claude/agents/"; do
+  for line in "/${prefix}CLAUDE.md" "/${prefix}CLAUDE.md.bak" "/${prefix}.claude/"; do
     grep -qxF "$line" "$exclude" 2>/dev/null || printf '%s\n' "$line" >> "$exclude"
   done
 fi

@@ -35,14 +35,23 @@ test_no_candidate_for_benign_change() {
   rm -rf "$r"
 }
 
-test_stop_hook_surfaces_then_debounces() {
+test_stop_hook_surfaces_new_candidate_then_silent() {
   local r; r="$(mk_repo rust main.rs 'fn main() {}')"
   printf 'fn f() { unsafe { } }\n' >> "$r/main.rs"
-  local out1; out1="$( cd "$r" && bash "$DIR/hooks/stop-orchestrator.sh" </dev/null )"
-  assert_contains "$out1" '"decision":"block"' "first stop surfaces a block"
-  assert_contains "$out1" 'unsafe-auditor' "block names the candidate"
-  local out2; out2="$( cd "$r" && bash "$DIR/hooks/stop-orchestrator.sh" </dev/null )"
-  assert_eq "" "$out2" "same diff is debounced (silent second time)"
+  local err1 rc1
+  set +e
+  err1="$( cd "$r" && bash "$DIR/hooks/stop-orchestrator.sh" </dev/null 2>&1 1>/dev/null )"; rc1=$?
+  set -e
+  assert_eq "2" "$rc1" "blocks with exit code 2 on first surface"
+  assert_contains "$err1" "unsafe-auditor" "names the candidate on stderr"
+  # Keep editing (changed diff) but SAME candidate type -> must not re-fire.
+  printf 'fn g() { unsafe { } }\n' >> "$r/main.rs"
+  local err2 rc2
+  set +e
+  err2="$( cd "$r" && bash "$DIR/hooks/stop-orchestrator.sh" </dev/null 2>&1 1>/dev/null )"; rc2=$?
+  set -e
+  assert_eq "0" "$rc2" "changed diff, already-surfaced candidate -> exit 0 (no nag, no loop)"
+  assert_eq "" "$err2" "no message on the already-surfaced turn"
   rm -rf "$r"
 }
 

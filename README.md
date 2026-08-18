@@ -45,8 +45,8 @@ clean-code-cpp · clean-code-audio · clean-code-rust · clean-code-go ·
 clean-code-python · clean-code-bash · clean-code-c · clean-code-ts
 
 ## Agents
-A **74-agent library** (`agent-library/`), surfaced *per codebase* so you only ever
-see the relevant few:
+**76 agents total** — a **68-agent scoped library** (`agent-library/`) surfaced
+*per codebase* so you only ever see the relevant few, plus **8 global** agents:
 - **Global** (installed to `~/.claude/agents/`): `starter-author`, `dep-auditor`, and
   stack-agnostic product agents (`idea-brainstormer`, `product-critic`, `naming-agent`,
   `release-copywriter`, `demo-script-writer`, `competitor-analyst`).

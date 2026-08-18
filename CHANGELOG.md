@@ -4,6 +4,21 @@ Bump `version` in `.claude-plugin/plugin.json` on every release — that's the
 signal Claude Code uses to offer an update (`/plugin marketplace update
 claude-starters` → `/plugin update claude-starters`).
 
+## 1.1.1
+Data-safety fixes from a rigorous harsh review + plugin-mechanics audit:
+- **`--update`** refuses a file with a lone begin-marker (no end) instead of
+  truncating everything after it.
+- **`--force`** refuses to overwrite an existing `.bak` (a second `--force`
+  would otherwise have destroyed the original).
+- **`--framework`** values substituted literally — no `sed` crash/injection from
+  `|`, `&`, etc. (and no truncate-then-crash stub in the `--force` path).
+- **`--path`** rejects absolute paths and `..`.
+- **Stop hook** now uses the documented exit-code-2 + stderr mechanism (not a
+  `decision:block` JSON), and debounces by candidate **set** — each risk surfaces
+  once (no per-edit nagging, no exit-2 loop).
+- Portable word boundaries (no `\b`), exact stack matching (no substring
+  collisions), `.claude/` + `CLAUDE.md.bak` git-excluded, `--add` idempotent.
+
 ## 1.1.0
 - **Applier flags:** `--list [<stack>]`, `--dry-run`, `--print`, `--no-agents`,
   `--force` (backs up to `CLAUDE.md.bak`), `--version`, `--help`.
