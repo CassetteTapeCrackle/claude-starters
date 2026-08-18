@@ -16,7 +16,8 @@ added="$(printf '%s\n' "$diff_all" | grep '^+' | grep -v '^+++' || true)"
 [ -n "$added" ] || exit 0
 changed_files="$(git -C "$dir" diff --name-only HEAD 2>/dev/null || true)"
 
-has_stack() { case "$stacks" in *"$1"*) return 0 ;; *) return 1 ;; esac; }
+has_stack() { printf '%s\n' "$stacks" | grep -qxF "$1"; }                     # exact line match
+is_audio()  { printf '%s\n' "$stacks" | grep -qxE 'audio-plugin|audio-app|audio-external|web-audio'; }
 added_has() { printf '%s\n' "$added" | grep -qE "$1"; }
 
 # Does any changed file contain an audio callback? (grep the file, not the diff.)
@@ -32,17 +33,18 @@ EOF
   return 1
 }
 
+WB='[^[:alnum:]_]'   # portable word boundary (POSIX ERE has no \b)
 cands=()
-if has_stack rust && added_has '\bunsafe\b'; then
+if has_stack rust && added_has "(^|$WB)unsafe($WB|\$)"; then
   cands+=("unsafe-auditor")
 fi
-if has_stack audio \
-   && added_has '(\bnew\b|malloc|std::mutex|juce::String|\bDBG\b|std::cout)' \
-   && changed_file_has '(processBlock|::process|perform)'; then
+if is_audio \
+   && added_has "(^|$WB)new($WB|\$)|malloc|std::mutex|juce::String|(^|$WB)DBG($WB|\$)|std::cout" \
+   && changed_file_has 'processBlock|::process|perform'; then
   cands+=("rt-safety-auditor")
 fi
 if { has_stack web-ts || has_stack node-api || has_stack electron || has_stack tauri; } \
-   && added_has '(: any\b|as any\b|@ts-ignore)'; then
+   && added_has "(: any($WB|\$)|as any($WB|\$)|@ts-ignore)"; then
   cands+=("any-eliminator")
 fi
 

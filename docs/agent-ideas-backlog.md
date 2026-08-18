@@ -1,6 +1,6 @@
 # Agent ideas backlog
 
-> **STATUS 2026-08-18:** BUILT. The full library (74 agents) now lives in
+> **STATUS 2026-08-18:** BUILT. 76 agents total — 68 in the scoped library, 8 global — live in
 > `agent-library/` and is wired per stack (`starters/<stack>/agents.txt`),
 > plus `common.txt` (every project) and `global.txt` (installed globally).
 > This document remains as the original ideation / catalogue. Remaining

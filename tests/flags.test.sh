@@ -72,4 +72,43 @@ test_force_backs_up_then_overwrites() {
   rm -rf "$tmp"
 }
 
+test_update_refuses_lone_begin_marker() {
+  local tmp; tmp="$(mktemp -d)"
+  ( cd "$tmp" && git init -q
+    printf '<!-- claude-starters:rules begin -->\nOLD\nPRECIOUS USER NOTES\n' > CLAUDE.md )
+  assert_fail bash -c "cd '$tmp' && CLAUDE_STARTERS_DIR='$DIR/starters' '$AS' python --framework fastapi --update"
+  assert_contains "$(cat "$tmp/CLAUDE.md")" "PRECIOUS USER NOTES" "lone-begin-marker file left intact (not truncated)"
+  rm -rf "$tmp"
+}
+
+test_double_force_preserves_original() {
+  local tmp; tmp="$(mktemp -d)"
+  ( cd "$tmp" && git init -q && printf 'MY ORIGINAL HANDWRITTEN\n' > CLAUDE.md
+    "$AS" python --framework none --force >/dev/null )
+  assert_fail bash -c "cd '$tmp' && CLAUDE_STARTERS_DIR='$DIR/starters' '$AS' python --framework none --force"
+  assert_eq "MY ORIGINAL HANDWRITTEN" "$(cat "$tmp/CLAUDE.md.bak")" "original preserved in .bak after refused 2nd force"
+  rm -rf "$tmp"
+}
+
+test_framework_with_metacharacters_is_literal() {
+  local tmp; tmp="$(mktemp -d)"
+  ( cd "$tmp" && git init -q && "$AS" python --framework 'A|B & C' >/dev/null )
+  assert_contains "$(cat "$tmp/CLAUDE.md")" "Framework: A|B & C" "metachar framework rendered literally (no sed crash/injection)"
+  rm -rf "$tmp"
+}
+
+test_framework_backslash_is_literal() {
+  local tmp; tmp="$(mktemp -d)"
+  ( cd "$tmp" && git init -q && "$AS" python --framework 'C:\new' >/dev/null )
+  assert_contains "$(cat "$tmp/CLAUDE.md")" 'Framework: C:\new' "backslash framework literal (awk ENVIRON, not -v)"
+  rm -rf "$tmp"
+}
+
+test_path_rejects_absolute_and_dotdot() {
+  local tmp; tmp="$(mktemp -d)"
+  assert_fail bash -c "cd '$tmp' && CLAUDE_STARTERS_DIR='$DIR/starters' '$AS' python --path /etc"
+  assert_fail bash -c "cd '$tmp' && CLAUDE_STARTERS_DIR='$DIR/starters' '$AS' python --path ../escape"
+  rm -rf "$tmp"
+}
+
 run_tests

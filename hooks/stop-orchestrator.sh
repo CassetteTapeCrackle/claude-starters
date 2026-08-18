@@ -1,30 +1,33 @@
 #!/usr/bin/env bash
 # Stop hook (light-Stop): on turn end, in a starter-applied project, surface any
-# reactive agent candidate ONCE per unique diff (debounced), then block the stop
-# so the orchestrator applies the agent-orchestration policy. Free unless a risk
-# pattern actually changed. No dependencies beyond git + bash.
+# NEW reactive agent candidate — once per candidate type, not once per diff — via
+# the documented Stop mechanism (exit code 2 + stderr, which continues the turn
+# and feeds the message back). Debounced by candidate SET (not diff hash), so
+# iterating on the same risk never re-nags and can't loop. Free unless a new risk
+# pattern appears. No dependencies beyond git + bash.
 set -euo pipefail
 trap 'exit 0' ERR   # fail-safe: a hook must never wedge the session
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 dir="$PWD"
 
-# Only act inside a starter-applied project.
 [ -f "$dir/.claude/.starter-applied" ] || exit 0
 
-# Debounce by the content hash of the current diff (git-native, portable).
-hash="$(git -C "$dir" diff HEAD 2>/dev/null | git hash-object --stdin 2>/dev/null || true)"
-seen="$dir/.claude/.orchestrator-seen"
-if [ -n "$hash" ] && [ -f "$seen" ] && [ "$(cat "$seen" 2>/dev/null || true)" = "$hash" ]; then
-  exit 0
-fi
-[ -n "$hash" ] && printf '%s' "$hash" > "$seen"
-
-cands="$(bash "$SCRIPT_DIR/detect-candidates.sh" "$dir" || true)"
+cands="$(bash "$SCRIPT_DIR/detect-candidates.sh" "$dir" 2>/dev/null || true)"
 [ -n "$cands" ] || exit 0
 
-list="$(printf '%s' "$cands" | tr '\n' ' ')"
-reason="Orchestration: changed code surfaced candidate agent(s): ${list}. Apply the agent-orchestration skill to decide skip / inline / delegate for each — bias to skip or inline unless an isolated context clearly pays. Do not re-run for this same diff."
-# JSON-escape without python (reason is single-line): backslash then doublequote.
-esc=${reason//\\/\\\\}
-esc=${esc//\"/\\\"}
-printf '{"decision":"block","reason":"%s"}\n' "$esc"
+seen="$dir/.claude/.orchestrator-seen"
+prev=""
+[ -f "$seen" ] && prev="$(cat "$seen" 2>/dev/null || true)"
+
+# Only candidate agents not already surfaced for this repo.
+new="$(comm -23 \
+        <(printf '%s\n' "$cands" | sed '/^$/d' | sort -u) \
+        <(printf '%s\n' "$prev"  | sed '/^$/d' | sort -u) || true)"
+[ -n "$new" ] || exit 0
+
+# Record the union BEFORE blocking, so the next turn stays silent (no loop).
+{ printf '%s\n' "$prev"; printf '%s\n' "$cands"; } | sed '/^$/d' | sort -u > "$seen"
+
+list="$(printf '%s' "$new" | tr '\n' ' ')"
+printf 'Orchestration: changed code surfaced new candidate agent(s): %s. Apply the agent-orchestration skill to decide skip / inline / delegate for each — bias to skip or inline unless an isolated context clearly pays.\n' "$list" >&2
+exit 2

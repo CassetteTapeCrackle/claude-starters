@@ -1,6 +1,6 @@
 {
   "name": "claude-starters",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Token-lean project starters, on-demand clean-code skills, a scoped 74-agent library, and a cost-aware auto-launch orchestrator for Claude Code.",
   "author": { "name": "Matt" },
   "homepage": "https://github.com/CassetteTapeCrackle/claude-starters",
