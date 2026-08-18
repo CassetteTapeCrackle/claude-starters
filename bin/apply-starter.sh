@@ -80,9 +80,11 @@ if [ -z "$framework" ]; then framework="none"; fi
 template="$STARTERS_DIR/$stack/CLAUDE.md"
 if [ ! -f "$template" ]; then echo "error: unknown stack '$stack' (no $template)" >&2; exit 1; fi
 
-# Literal token substitution (no regex / no special-char interpretation of $framework).
+# Literal token substitution. Value passed via ENVIRON (not -v) so awk does NOT
+# interpret backslash escapes in the framework name (e.g. C:\new, C++\Qt).
 render() {
-  awk -v fw="$framework" -v tok="__FRAMEWORK__" '
+  FW="$framework" awk '
+    BEGIN { fw=ENVIRON["FW"]; tok="__FRAMEWORK__" }
     { line=$0; out=""; i=index(line, tok)
       while (i > 0) { out = out substr(line,1,i-1) fw; line = substr(line, i+length(tok)); i=index(line, tok) }
       print out line }
@@ -111,7 +113,7 @@ if [ "$dry" -eq 1 ]; then
   else
     echo "[dry-run] agents: (skipped, --no-agents)"
   fi
-  echo "[dry-run] git-exclude: /${rel}CLAUDE.md, /${rel}CLAUDE.md.bak, /${rel}.claude/"
+  echo "[dry-run] git-exclude: /${rel}CLAUDE.md(.bak), /${rel}.claude/agents/, /${rel}.claude/.starter-* + .orchestrator-seen"
   exit 0
 fi
 
@@ -183,7 +185,9 @@ if git -C "$target_dir" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
   gitdir="$(git -C "$target_dir" rev-parse --absolute-git-dir)"
   prefix="$(git -C "$target_dir" rev-parse --show-prefix)"
   exclude="$gitdir/info/exclude"; mkdir -p "$(dirname "$exclude")"
-  for line in "/${prefix}CLAUDE.md" "/${prefix}CLAUDE.md.bak" "/${prefix}.claude/"; do
+  for line in "/${prefix}CLAUDE.md" "/${prefix}CLAUDE.md.bak" \
+              "/${prefix}.claude/agents/" "/${prefix}.claude/.starter-applied" \
+              "/${prefix}.claude/.starter-state" "/${prefix}.claude/.orchestrator-seen"; do
     grep -qxF "$line" "$exclude" 2>/dev/null || printf '%s\n' "$line" >> "$exclude"
   done
 fi

@@ -97,6 +97,13 @@ test_framework_with_metacharacters_is_literal() {
   rm -rf "$tmp"
 }
 
+test_framework_backslash_is_literal() {
+  local tmp; tmp="$(mktemp -d)"
+  ( cd "$tmp" && git init -q && "$AS" python --framework 'C:\new' >/dev/null )
+  assert_contains "$(cat "$tmp/CLAUDE.md")" 'Framework: C:\new' "backslash framework literal (awk ENVIRON, not -v)"
+  rm -rf "$tmp"
+}
+
 test_path_rejects_absolute_and_dotdot() {
   local tmp; tmp="$(mktemp -d)"
   assert_fail bash -c "cd '$tmp' && CLAUDE_STARTERS_DIR='$DIR/starters' '$AS' python --path /etc"

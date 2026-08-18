@@ -9,7 +9,8 @@ test_activates_common_and_stack_agents() {
     "$DIR/bin/apply-starter.sh" audio-plugin --framework juce >/dev/null )
   assert_file_exists "$tmp/.claude/agents/starter-conformance-checker.md" "common agent activated"
   assert_file_exists "$tmp/.claude/agents/rt-safety-auditor.md" "audio-plugin agent activated"
-  assert_eq "1" "$(grep -c '^/.claude/$' "$tmp/.git/info/exclude")" ".claude dir excluded"
+  assert_eq "1" "$(grep -c '^/.claude/agents/$' "$tmp/.git/info/exclude")" "agents dir excluded"
+  assert_eq "1" "$(grep -c '^/.claude/.starter-state$' "$tmp/.git/info/exclude")" "state file excluded"
   rm -rf "$tmp"
 }
 

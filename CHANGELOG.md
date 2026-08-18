@@ -17,7 +17,10 @@ Data-safety fixes from a rigorous harsh review + plugin-mechanics audit:
   `decision:block` JSON), and debounces by candidate **set** — each risk surfaces
   once (no per-edit nagging, no exit-2 loop).
 - Portable word boundaries (no `\b`), exact stack matching (no substring
-  collisions), `.claude/` + `CLAUDE.md.bak` git-excluded, `--add` idempotent.
+  collisions), targeted git-excludes (generated `.claude/agents/` + dotfiles +
+  `.bak`, not the whole `.claude/`), `--add` idempotent.
+- Framework substitution passes the value via `ENVIRON` (not awk `-v`), so
+  backslash-bearing names (`C:\new`, `C++\Qt`) render literally.
 
 ## 1.1.0
 - **Applier flags:** `--list [<stack>]`, `--dry-run`, `--print`, `--no-agents`,
