@@ -32,7 +32,8 @@ if [ -e "$target" ] && [ "$add" -eq 0 ]; then
 fi
 
 if [ -e "$target" ] && [ "$add" -eq 1 ]; then
-  { printf '\n\n---\n\n# Additional stack: %s\n' "$stack"; sed "s|__FRAMEWORK__|$framework|g" "$template" | tail -n +2; } >> "$target"
+  { printf '\n\n---\n\n## Starter rules: %s (appended by claude-starters)\n' "$stack"; sed "s|__FRAMEWORK__|$framework|g" "$template" | tail -n +2; } >> "$target"
+  mkdir -p "$target_dir/.claude"
   printf '%s\n' "$stack" >> "$target_dir/.claude/.starter-applied"
 else
   sed "s|__FRAMEWORK__|$framework|g" "$template" > "$target"

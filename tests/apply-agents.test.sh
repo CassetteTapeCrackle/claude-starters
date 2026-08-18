@@ -19,9 +19,20 @@ test_add_composes_two_stacks() {
     "$DIR/bin/apply-starter.sh" rust --framework cli --add >/dev/null )
   local c; c="$(cat "$tmp/CLAUDE.md")"
   assert_contains "$c" "Python project rules" "base stack present"
-  assert_contains "$c" "Additional stack: rust" "added stack header"
+  assert_contains "$c" "Starter rules: rust" "appended stack header"
   assert_contains "$c" "cargo clippy" "added stack rules present"
   assert_eq "$(printf 'python\nrust')" "$(cat "$tmp/.claude/.starter-applied")" "marker lists both stacks"
+  rm -rf "$tmp"
+}
+
+test_add_preserves_arbitrary_existing_claudemd() {
+  local tmp; tmp="$(mktemp -d)"; ( cd "$tmp"; git init -q
+    printf '# My Project\n\nHand-written rules the user cares about.\n' > CLAUDE.md
+    "$DIR/bin/apply-starter.sh" rust --framework cli --add >/dev/null )
+  local c; c="$(cat "$tmp/CLAUDE.md")"
+  assert_contains "$c" "# My Project" "original title preserved"
+  assert_contains "$c" "Hand-written rules the user cares about." "original body preserved verbatim"
+  assert_contains "$c" "Starter rules: rust" "starter rules appended below"
   rm -rf "$tmp"
 }
 
