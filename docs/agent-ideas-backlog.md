@@ -85,6 +85,59 @@ into `~/.claude/agents/` by `install.sh`, with a content/install test.
 - `test-author` — write tests matching the project's existing conventions.
 - `spec-critic` — attack a spec/plan for gaps before building (brainstorming self-review as an agent; complements harsh-reviewer, scoped to specs).
 
+## Per-starter agents ⬜ (audit/enforce, scoped to a stack)
+- ⭐⭐ `starter-conformance-checker` — **meta**: audits a repo against its
+  *applied* starter `CLAUDE.md` and flags drift (`.unwrap()` in Rust,
+  allocation in `processBlock`, `any` in strict TS, missing `ScopedNoDenormals`).
+  Makes the whole system self-enforcing. Crown jewel.
+- web-ts: `a11y-auditor` · `dead-code-eliminator`
+- node-api: `route-schema-auditor` (every route validates in/out) · `n+1-hunter`
+- electron: `electron-security-auditor` (contextIsolation/sandbox/nodeIntegration/CSP)
+- tauri: `capability-auditor` (least-privilege allowlist review)
+- swiftui: `swiftui-state-auditor` · `retain-cycle-hunter`
+- android: `recomposition-profiler` · `coroutine-scope-auditor`
+- flutter: `rebuild-profiler` · `riverpod-provider-auditor`
+- python-ml: `repro-auditor` (seeds/determinism/data-leakage) · `tensor-shape-checker`
+- web-audio: `worklet-safety-auditor` · audio-external: `perform-routine-auditor`
+  (or generalize `rt-safety-auditor` to cover all audio callbacks)
+
+## Creation / design agents ⬜ (generative — each MUST produce a concrete artifact, not just a persona)
+Mapped to lifecycle phases (Dream → Design → Ship → Research).
+
+**Dream / ideate:**
+- ⭐ `plugin-ideator` — concrete plugin concepts (DSP idea + parameter set + the hook). Domain-tuned.
+- `idea-brainstormer` — divergent concept generation (distinct from superpowers `brainstorming`, which is convergent).
+- `prd-writer` — vague idea → structured PRD (params, constraints, non-goals). Feeds the audio-plugin PRD step + node-api schemas.
+- `product-critic` — attacks a concept on differentiation/scope/market (harsh-reviewer for the idea, not the code).
+
+**Design (UX/UI):**
+- `ux-critic` — real heuristics (Nielsen, IA, user flows) to critique/propose a flow.
+- `ui-designer` — layout, visual hierarchy, component inventory → Design-phase mockup spec.
+- ⭐ `plugin-ui-designer` — audio-UI conventions (knobs, meters, spectrum, skeuo vs flat); serves the audio-plugin Design phase.
+- `design-system-author` — tokens (color/type/spacing) + component set.
+- NOTE: `ux-critic`/`ui-designer` overlap superpowers `frontend-design`; justify only via isolated-context subagent use.
+
+**Ship / communicate:**
+- `technical-writer` — README/docs tuned to an audience.
+- `release-copywriter` — plugin-store / landing-page copy.
+- `demo-script-writer` — walkthrough/video script.
+- `naming-agent` — product/feature/plugin names (greppable-names ethos).
+
+**Research:**
+- `deep-researcher` / `tech-scout` — survey libraries/approaches with sources.
+- `competitor-analyst` — survey existing solutions before building.
+
+**Top picks (domain-fit + real deliverable):** `plugin-ideator`,
+`plugin-ui-designer`, `prd-writer`, `deep-researcher`, `technical-writer`.
+**Skip:** generic "senior-engineer"/"architect" personas — overlap the base
+assistant + superpowers with no distinct artifact.
+
+## Related system upgrades (non-agent) ⬜
+Captured here so they aren't lost; not agents.
+- `SessionStart` detection hook (Trigger 2 — deferred half of the original design): auto-suggest a starter when opening an existing repo.
+- Applier ergonomics: `--list`, `--dry-run`, and an `update`/sync path (vs the current no-clobber refusal).
+- CI (GitHub Action: suite + shellcheck) — needed once public.
+
 ## Next session
 Pick from ⭐ first (recommended: the three audio agents — nothing else covers
 them and they enforce audio-plugin rules). Then convert ⬜ items on demand,
