@@ -138,11 +138,10 @@ Mapped to lifecycle phases (Dream → Design → Ship → Research).
 **Skip:** generic "senior-engineer"/"architect" personas — overlap the base
 assistant + superpowers with no distinct artifact.
 
-## Related system upgrades (non-agent) ⬜
-Captured here so they aren't lost; not agents.
-- `SessionStart` detection hook (Trigger 2 — deferred half of the original design): auto-suggest a starter when opening an existing repo.
-- Applier ergonomics: `--list`, `--dry-run`, and an `update`/sync path (vs the current no-clobber refusal).
-- CI (GitHub Action: suite + shellcheck) — needed once public.
+## Related system upgrades (non-agent)
+- ✅ `SessionStart` detection hook (Trigger 2) — offers a starter on existing repos, opt-in, non-destructive, zero repo footprint. BUILT.
+- ✅ CI (GitHub Action: suite + shellcheck). BUILT.
+- ⬜ Applier ergonomics: `--list`, `--dry-run`, and an `update`/sync path (vs the current no-clobber refusal).
 
 ## Next session
 Pick from ⭐ first (recommended: the three audio agents — nothing else covers
