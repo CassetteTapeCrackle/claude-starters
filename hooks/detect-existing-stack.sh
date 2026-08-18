@@ -5,6 +5,7 @@
 # so declining leaves the repo completely untouched. Never writes into the repo,
 # never touches CLAUDE.md — it only surfaces a suggestion for the agent to relay.
 set -euo pipefail
+trap 'exit 0' ERR   # fail-safe: never wedge the session
 dir="$PWD"
 
 root="$(git -C "$dir" rev-parse --show-toplevel 2>/dev/null || true)"
