@@ -18,6 +18,14 @@ After brainstorming settles on a language + framework:
 
     /apply-starter python --framework fastapi
 
+## Use (existing repo)
+Open an existing repo and the plugin **detects the stack** (`Cargo.toml`,
+`package.json`, …) and **offers** to apply the matching starter — once per repo,
+opt-in. If the repo already has a `CLAUDE.md`, it appends the rules
+non-destructively via `--add` (your file is never overwritten). Decline and the
+repo is left completely untouched (the "already suggested" state is stored
+outside the repo).
+
 ## Use (multi-language monorepo)
 Apply different starters to different subtrees; each gets its own scoped,
 git-ignored `CLAUDE.md`:

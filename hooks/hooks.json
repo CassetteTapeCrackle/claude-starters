@@ -1,7 +1,10 @@
 {
   "hooks": {
     "SessionStart": [
-      { "hooks": [ { "type": "command", "command": "${CLAUDE_PLUGIN_ROOT}/hooks/session-reflex.sh" } ] }
+      { "hooks": [
+        { "type": "command", "command": "${CLAUDE_PLUGIN_ROOT}/hooks/session-reflex.sh" },
+        { "type": "command", "command": "${CLAUDE_PLUGIN_ROOT}/hooks/detect-existing-stack.sh" }
+      ] }
     ],
     "Stop": [
       { "hooks": [ { "type": "command", "command": "${CLAUDE_PLUGIN_ROOT}/hooks/stop-orchestrator.sh" } ] }
