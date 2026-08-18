@@ -3,6 +3,7 @@
 # high-risk patterns tied to the applied stack(s) and print candidate agent
 # names (one per line). No LLM. Exit silent if nothing to surface.
 set -euo pipefail
+trap 'exit 0' ERR   # fail-safe: never wedge the session
 dir="${1:-$PWD}"
 
 marker="$dir/.claude/.starter-applied"

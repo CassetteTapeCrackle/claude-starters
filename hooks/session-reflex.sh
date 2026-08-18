@@ -2,6 +2,7 @@
 # SessionStart hook: inject the proactive orchestration reflex as session context
 # (plugin-native alternative to editing the user's CLAUDE.md; toggles with the plugin).
 set -euo pipefail
+trap 'exit 0' ERR   # fail-safe: never wedge the session
 ctx="Agent orchestration is active. At a task's start (or when the Stop hook surfaces a candidate), check whether the task's phase maps to a specialist agent (ideate/spec/design/research/debug/audit/ship), then apply the agent-orchestration skill to decide skip / inline / delegate. Bias to inline; delegate only when an isolated context clearly pays."
 esc=${ctx//\\/\\\\}
 esc=${esc//\"/\\\"}

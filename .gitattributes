@@ -1,0 +1,6 @@
+# Force LF so shell hooks/scripts run on Windows clones too.
+* text=auto eol=lf
+*.sh text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+*.txt text eol=lf

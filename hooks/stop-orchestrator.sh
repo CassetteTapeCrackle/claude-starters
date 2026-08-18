@@ -4,6 +4,7 @@
 # so the orchestrator applies the agent-orchestration policy. Free unless a risk
 # pattern actually changed. No dependencies beyond git + bash.
 set -euo pipefail
+trap 'exit 0' ERR   # fail-safe: a hook must never wedge the session
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 dir="$PWD"
 
