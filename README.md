@@ -5,7 +5,7 @@ Token-lean project starters for Claude Code. On a chosen stack+framework,
 and points the agent at deeper on-demand skills.
 
 ## Install (plugin — recommended)
-    /plugin marketplace add OWNER/claude-starters
+    /plugin marketplace add CassetteTapeCrackle/claude-starters
     /plugin install claude-starters
 
 Bundles the `/apply-starter` command, the `clean-code-*` + `agent-orchestration`
