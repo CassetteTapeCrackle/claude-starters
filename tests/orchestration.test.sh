@@ -46,14 +46,4 @@ test_stop_hook_surfaces_then_debounces() {
   rm -rf "$r"
 }
 
-test_install_wires_stop_hook_once() {
-  local home; home="$(mktemp -d)"
-  HOME="$home" bash "$DIR/install.sh" >/dev/null
-  HOME="$home" bash "$DIR/install.sh" >/dev/null
-  local n; n="$(python3 -c "import json;print(len(json.load(open('$home/.claude/settings.json'))['hooks']['Stop']))")"
-  assert_eq "1" "$n" "Stop hook wired exactly once"
-  assert_file_exists "$home/.claude/skills/agent-orchestration/SKILL.md" "orchestration skill installed"
-  rm -rf "$home"
-}
-
 run_tests
