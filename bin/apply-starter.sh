@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
-STARTERS_DIR="${CLAUDE_STARTERS_DIR:-$HOME/claude-starters/starters}"
-AGENT_LIB="${CLAUDE_AGENT_LIB:-$(dirname "$STARTERS_DIR")/agent-library}"
+SELF="$(cd "$(dirname "$0")" && pwd)"; ROOT="$(dirname "$SELF")"   # bin/ -> plugin root
+STARTERS_DIR="${CLAUDE_STARTERS_DIR:-$ROOT/starters}"
+AGENT_LIB="${CLAUDE_AGENT_LIB:-$ROOT/agent-library}"
 
 usage() { echo "usage: apply-starter <stack> [--framework <name>] [--path <subdir>] [--add]" >&2; exit 2; }
 

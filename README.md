@@ -4,11 +4,20 @@ Token-lean project starters for Claude Code. On a chosen stack+framework,
 `/apply-starter` writes a git-ignored project `CLAUDE.md` (framework locked)
 and points the agent at deeper on-demand skills.
 
-## Install
+## Install (plugin — recommended)
+    /plugin marketplace add OWNER/claude-starters
+    /plugin install claude-starters
+
+Bundles the `/apply-starter` command, the `clean-code-*` + `agent-orchestration`
+skills, the global agents, and the orchestration hooks. Enable / disable /
+uninstall entirely through `/plugin` — no manual file surgery.
+
+## Install (local dev, no plugin)
     bash install.sh
 
-Symlinks the `/apply-starter` command, the `clean-code-*` skills, and the
-agents into `~/.claude/`, and appends a lean block to `~/.claude/CLAUDE.md`.
+Symlinks the command, skills, and global agents into `~/.claude/`, wires the
+orchestration Stop hook into `settings.json`, and appends a lean block to
+`~/.claude/CLAUDE.md`. (The plugin path does all this without touching your files.)
 
 ## Use (greenfield)
 After brainstorming settles on a language + framework:
