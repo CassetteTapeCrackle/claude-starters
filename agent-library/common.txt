@@ -1,0 +1,10 @@
+starter-conformance-checker
+debugger
+regression-hunter
+test-author
+prd-writer
+spec-critic
+technical-writer
+deep-researcher
+migration-agent
+perf-profiler
