@@ -1,5 +1,11 @@
 # Agent ideas backlog
 
+> **STATUS 2026-08-18:** BUILT. The full library (74 agents) now lives in
+> `agent-library/` and is wired per stack (`starters/<stack>/agents.txt`),
+> plus `common.txt` (every project) and `global.txt` (installed globally).
+> This document remains as the original ideation / catalogue. Remaining
+> open items are the non-agent upgrades (SessionStart hook, `--list`/`--dry-run`).
+
 Candidate agents for the `claude-starters` system, captured for a later
 session. Build them the same way as existing agents: `agents/<name>.md`
 (frontmatter `name` + trigger `description` + `tools` + body), symlinked

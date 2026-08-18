@@ -34,7 +34,20 @@ clean-code-cpp · clean-code-audio · clean-code-rust · clean-code-go ·
 clean-code-python · clean-code-bash · clean-code-c · clean-code-ts
 
 ## Agents
-starter-author (scaffold a new starter) · dep-auditor (dependency hygiene)
+A **74-agent library** (`agent-library/`), surfaced *per codebase* so you only ever
+see the relevant few:
+- **Global** (installed to `~/.claude/agents/`): `starter-author`, `dep-auditor`, and
+  stack-agnostic product agents (`idea-brainstormer`, `product-critic`, `naming-agent`,
+  `release-copywriter`, `demo-script-writer`, `competitor-analyst`).
+- **Common** (activated into every applied project's `.claude/agents/`): conformance,
+  debugger, regression-hunter, test-author, prd-writer, spec-critic, technical-writer,
+  deep-researcher, migration-agent, perf-profiler.
+- **Per-stack**: language/domain auditors activated by the starter — e.g. `audio-plugin`
+  brings `rt-safety-auditor`, `dsp-golden-test-author`, `pluginval-runner`, …; `rust`
+  brings `unsafe-auditor`, `lifetime-untangler`, …
+
+Add a second stack's agents to a mixed directory with `/apply-starter <stack> --add`.
+See `docs/agent-ideas-backlog.md` for the full catalogue.
 
 ## Extend
 Add `starters/<stack>/{CLAUDE.md,manifest.json}` + a content test; optionally
