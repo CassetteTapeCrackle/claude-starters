@@ -6,3 +6,5 @@ prd-writer
 spec-critic
 technical-writer
 deep-researcher
+migration-agent
+perf-profiler

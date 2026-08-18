@@ -18,6 +18,7 @@ test_install_symlinks_agents() {
   HOME="$home" bash "$DIR/install.sh" >/dev/null
   assert_file_exists "$home/.claude/agents/starter-author.md" "starter-author installed"
   assert_file_exists "$home/.claude/agents/dep-auditor.md" "dep-auditor installed"
+  assert_file_exists "$home/.claude/agents/naming-agent.md" "global product agent installed"
   rm -rf "$home"
 }
 

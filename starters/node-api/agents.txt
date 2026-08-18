@@ -3,3 +3,6 @@ n-plus-one-hunter
 zod-schema-generator
 any-eliminator
 tsconfig-strict-migrator
+index-advisor
+query-optimizer
+migration-writer

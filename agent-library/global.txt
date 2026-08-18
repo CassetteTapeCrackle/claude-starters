@@ -1,0 +1,6 @@
+idea-brainstormer
+product-critic
+naming-agent
+release-copywriter
+demo-script-writer
+competitor-analyst

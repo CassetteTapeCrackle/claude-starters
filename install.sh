@@ -17,6 +17,14 @@ for a in "$SRC"/agents/*.md; do
   [ -e "$a" ] || continue
   ln -sf "$a" "$DEST/agents/$(basename "$a")"
 done
+# Stack-agnostic product/ideation agents are global (available everywhere, not per-project).
+if [ -f "$SRC/agent-library/global.txt" ]; then
+  while IFS= read -r a || [ -n "$a" ]; do
+    [ -n "$a" ] || continue
+    case "$a" in \#*) continue ;; esac
+    [ -f "$SRC/agent-library/$a.md" ] && ln -sf "$SRC/agent-library/$a.md" "$DEST/agents/$a.md"
+  done < "$SRC/agent-library/global.txt"
+fi
 
 BLOCK_BEGIN="<!-- claude-starters:begin -->"
 BLOCK_END="<!-- claude-starters:end -->"
