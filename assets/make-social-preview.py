@@ -28,24 +28,39 @@ SPINE_L, SPINE_R = (0, 1), (26, 27)
 ARM_L, ARM_R = (2, 6), (21, 25)
 ARM_ROWS = ((0, 2), (32, 2))     # (start_row, thickness)
 
-# (row, col_start, col_end, density) — density carries depth: d25 sits back,
-# d75 comes forward, so overlapping leaves separate without outlines.
-# The stem is a uniform two cells wide: a one-sided taper left the right-hand
-# leaves with a one-cell gap and made them float.
-BUD     = [(3, 13, 14, "d50"), (4, 13, 14, "d75")]
+# One density per leaf, never per row: grading rows inside a leaf puts a hard
+# dark line through its middle, which reads as a plank with a drop shadow.
+# Depth comes from giving whole leaves different densities.
+#
+# Each leaf is a diagonal blade stepping outward and upward from the stem, two
+# rows per step so it has body — one row per step reads as a thin ribbon.
+# d25 is unused for leaves: at this size it renders as a ghost.
+#
+# Stem is one cell (col 13); left leaves attach at col 12, right at col 14.
 
-# Leaves alternate down the stem rather than sitting in opposite pairs — level
-# pairs read as a crossbar driven through the trunk.
-UPPER_L = [(6, 5, 8, "d25"), (7, 5, 10, "d50"), (8, 6, 12, "d75"), (9, 9, 12, "d50")]
-UPPER_R = [(11, 19, 22, "d25"), (12, 17, 22, "d50"), (13, 15, 22, "d75"), (14, 15, 18, "d50")]
+def blade(base_row, going_right, density, steps=3):
+    """Diagonal blade: `steps` steps of 2 rows, sweeping out and up from the
+    stem. Fewer steps for newer growth near the tip."""
+    spans = [(14, 17), (16, 20), (19, 22)] if going_right else [(9, 12), (6, 10), (5, 7)]
+    out = []
+    for i, (a, b) in enumerate(spans[:steps]):
+        top = base_row - 2 * i
+        out += [(top, a, b, density), (top - 1, a, b, density)]
+    return out
 
-LOWER_L = [(17, 6, 11, "d25"), (18, 5, 12, "d50"), (19, 6, 12, "d75"), (20, 9, 12, "d50")]
-LOWER_R = [(22, 17, 21, "d25"), (23, 15, 21, "d50"), (24, 15, 20, "d75"), (25, 15, 17, "d50")]
+# growing tip: just the stem carried up. Anything wider than the stem here
+# reads as a cap or a crossbar, whatever size it is.
+BUD = [(3, 13, 13, "d50"), (4, 13, 13, "d75")]
 
-LEAVES = BUD + UPPER_L + UPPER_R + LOWER_R + LOWER_L
+LEAF_L1 = blade(10, False, "d50", steps=2)   # newest growth, shorter
+LEAF_R1 = blade(15, True,  "d75")
+LEAF_L2 = blade(21, False, "d75")
+LEAF_R2 = blade(26, True,  "d50")
 
-STEM = [(5, 13, 14, 24)]                       # (row, c0, c1, rows) solid, uniform
-SOIL_ROWS = [(29, 8, 19), (30, 7, 20)]         # two courses, not a stepped plinth
+LEAVES = BUD + LEAF_L1 + LEAF_R1 + LEAF_L2 + LEAF_R2
+
+STEM = [(5, 13, 13, 24)]                       # (row, c0, c1, rows) one cell wide
+SOIL_ROWS = [(29, 10, 16), (30, 9, 17)]
 
 # ---- copy ----------------------------------------------------------------
 TX, CX, DX = 560, 596, 716
@@ -83,7 +98,7 @@ for r0, th in ARM_ROWS:
     body.append(block(r0, *ARM_R, th, "url(#brace)"))
 
 for row, c0, c1, rows in STEM:
-    body.append(block(row, c0, c1, rows, STEM_G))
+    body.append(block(row, c0, c1, rows, "url(#d75)"))
 for row, c0, c1, dens in LEAVES:
     body.append(block(row, c0, c1, 1, f"url(#{dens})"))
 for row, c0, c1 in SOIL_ROWS:
@@ -132,7 +147,7 @@ svg = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{
     {dither("d50", "#E8F1E7", "#3C8552", 8)}
     {dither("d75", "#E8F1E7", "#2A6740", 12)}
     {dither("soil", "#EDE3D8", "#B8875F", 9)}
-    {dither("brace", "#D97757", "#EBA98F", 6)}
+    {dither("brace", "#D97757", "#E29A80", 6)}
   </defs>
   <rect width="{W}" height="{H}" fill="{BG}"/>
   {sparks}
