@@ -1,3 +1,13 @@
 # Runtime / local
 .DS_Store
 *.log
+*.bak
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+
+# Local Claude Code / worktrees
+.claude/settings.local.json
+.worktrees/
