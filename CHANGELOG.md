@@ -4,6 +4,31 @@ Bump `version` in `.claude-plugin/plugin.json` on every release — that's the
 signal Claude Code uses to offer an update (`/plugin marketplace update
 claude-starters` → `/plugin update claude-starters`).
 
+## 1.2.0
+- **Plugin configuration:** `userConfig` declares two boolean opt-outs, prompted
+  when the plugin is enabled and changeable from `/plugin` — no hand-editing
+  `settings.json`. `suggest_on_existing_repos` gates the existing-repo offer;
+  `turn_end_orchestrator` gates the turn-end agent surfacing. The hooks read
+  them from `CLAUDE_PLUGIN_OPTION_*`, and **unset means enabled**, so upgrading
+  changes nothing for anyone who skips the prompts. Gates use `case`, not
+  `[ ] && exit`, so a non-match can't trip the hooks' `ERR` trap.
+- **`displayName`:** shows as "Claude Starters" in the `/plugin` picker.
+- **Docs:** README restructured into chapters (Why / How it works /
+  Orchestration / Configuration / Flags / FAQ / Contributing). The orchestrator
+  and the full flag set were both undocumented despite being in the tagline and
+  the script respectively.
+- **Fixed:** plugin + marketplace descriptions said "74-agent library"; it is 68
+  in the library plus 8 global = 76.
+- **CI:** adds explicit `setup-python` — several content tests shell out to
+  `python3` and were silently relying on the runner image providing it. Also
+  `workflow_dispatch`, read-only permissions, and `checkout`/`setup-python` at
+  v7. The `test` job must stay unnamed: `master` requires the status check
+  context `test`, which is the job id, so adding a display name makes every PR
+  unmergeable.
+- **Repo:** CONTRIBUTING, bug + new-starter issue templates, Dependabot for
+  Actions, and `assets/` — logo, animated demo, and a social preview card with
+  the script that generates it.
+
 ## 1.1.1
 Data-safety fixes from a rigorous harsh review + plugin-mechanics audit:
 - **`--update`** refuses a file with a lone begin-marker (no end) instead of
