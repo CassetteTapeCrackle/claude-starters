@@ -9,7 +9,7 @@ library, and cost-aware auto-launch orchestration — for Claude Code.**
 
 [![CI](https://github.com/CassetteTapeCrackle/claude-starters/actions/workflows/ci.yml/badge.svg)](https://github.com/CassetteTapeCrackle/claude-starters/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
-[![Version](https://img.shields.io/badge/version-1.1.1-D97757)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-1.2.0-D97757)](CHANGELOG.md)
 [![Starters](https://img.shields.io/badge/starters-23-4F9A61)](#starters)
 [![Agents](https://img.shields.io/badge/agents-76-4F9A61)](#agents)
 [![Claude Code plugin](https://img.shields.io/badge/Claude%20Code-plugin-D97757)](#install)

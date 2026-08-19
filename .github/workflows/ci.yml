@@ -10,6 +10,9 @@ permissions:
   contents: read
 
 jobs:
+  # Do NOT add a `name:` here. Branch protection on master requires the
+  # status check context "test", which is this job id; a display name
+  # renames the context and makes every PR permanently unmergeable.
   test:
     runs-on: ubuntu-latest
     steps:
