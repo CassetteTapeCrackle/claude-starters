@@ -1,10 +1,33 @@
+<div align="center">
+
+<img src="assets/logo.svg" width="84" alt="">
+
 # claude-starters
 
-Token-lean project starters for Claude Code. On a chosen stack+framework,
-`/apply-starter` writes a git-ignored project `CLAUDE.md` (framework locked)
-and points the agent at deeper on-demand skills.
+**Token-lean project starters, on-demand clean-code skills, a scoped 76-agent
+library, and cost-aware auto-launch orchestration — for Claude Code.**
+
+[![CI](https://github.com/CassetteTapeCrackle/claude-starters/actions/workflows/ci.yml/badge.svg)](https://github.com/CassetteTapeCrackle/claude-starters/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+[![Version](https://img.shields.io/badge/version-1.1.1-D97757)](CHANGELOG.md)
+[![Starters](https://img.shields.io/badge/starters-23-4F9A61)](#starters)
+[![Agents](https://img.shields.io/badge/agents-76-4F9A61)](#agents)
+[![Claude Code plugin](https://img.shields.io/badge/Claude%20Code-plugin-D97757)](#install)
+
+[Demo](#demo) · [Install](#install) · [Use](#use) · [Starters](#starters) · [Skills](#skills) · [Agents](#agents) · [Extend](#extend)
+
+</div>
+
+## Demo
+
+<img src="assets/demo.svg" width="100%" alt="Terminal session: running /apply-starter rust --framework axum prints 'Applied rust starter (framework: axum) to .'; listing .claude/agents shows 14 agents were activated; then git status --short prints nothing, because every file it wrote is git-ignored.">
+
+Pick a stack, get a framework-locked `CLAUDE.md` plus exactly the agents that stack
+needs — and **`git status` stays empty**. Everything it writes is git-ignored, so your
+repo is byte-for-byte what it was before.
 
 ## Install
+
     /plugin marketplace add CassetteTapeCrackle/claude-starters
     /plugin install claude-starters
 
@@ -13,12 +36,14 @@ skills, the global agents, and the orchestration hooks. Enable / disable /
 uninstall entirely through `/plugin` — no manual file surgery, nothing written
 to your `~/.claude/`.
 
-## Use (greenfield)
+## Use
+
+### Greenfield
 After brainstorming settles on a language + framework:
 
     /apply-starter python --framework fastapi
 
-## Use (existing repo)
+### Existing repo
 Open an existing repo and the plugin **detects the stack** (`Cargo.toml`,
 `package.json`, …) and **offers** to apply the matching starter — once per repo,
 opt-in. If the repo already has a `CLAUDE.md`, it appends the rules
@@ -26,7 +51,7 @@ non-destructively via `--add` (your file is never overwritten). Decline and the
 repo is left completely untouched (the "already suggested" state is stored
 outside the repo).
 
-## Use (multi-language monorepo)
+### Multi-language monorepo
 Apply different starters to different subtrees; each gets its own scoped,
 git-ignored `CLAUDE.md`:
 
@@ -40,7 +65,9 @@ git-ignored `CLAUDE.md`:
 **Mobile/desktop:** swiftui · android · flutter
 **ML/infra:** python-ml · terraform · docker
 
-## Depth skills (auto-fire on relevant code, ~free at rest)
+## Skills
+Depth skills that auto-fire on relevant code and cost ~nothing at rest:
+
 clean-code-cpp · clean-code-audio · clean-code-rust · clean-code-go ·
 clean-code-python · clean-code-bash · clean-code-c · clean-code-ts
 
@@ -69,3 +96,6 @@ shellcheck-clean.
 ## Test
     for t in tests/*.test.sh; do bash "$t"; done
     shellcheck bin/apply-starter.sh hooks/*.sh tests/*.sh
+
+## License
+MIT — see [LICENSE](LICENSE).

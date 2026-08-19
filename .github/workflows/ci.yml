@@ -4,12 +4,22 @@ on:
   push:
     branches: [ master, main ]
   pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   test:
+    name: tests + shellcheck
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      # several content tests shell out to python3 for JSON validation
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
 
       - name: Install shellcheck
         run: sudo apt-get update && sudo apt-get install -y shellcheck
@@ -23,7 +33,8 @@ jobs:
           git config --global user.name ci
           fail=0
           for t in tests/*.test.sh; do
-            echo "== $t"
-            bash "$t" || fail=1
+            echo "::group::$t"
+            if bash "$t"; then echo "PASS $t"; else echo "FAIL $t"; fail=1; fi
+            echo "::endgroup::"
           done
           exit $fail
