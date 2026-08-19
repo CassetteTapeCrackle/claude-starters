@@ -14,7 +14,7 @@ You author new starters for the `~/claude-starters` repo. Work TDD and keep ever
    - Rules must be the language's *canonical* conventions (formatter, linter, test runner, error-handling norm). Greppable names, one responsibility, early returns. **No line-count dogma.**
 3. Create `starters/<stack>/manifest.json`: `stack`, `frameworks` (array), optional `skill`, and a `commands` map (test/lint/format/etc.).
 4. Add assertions to `tests/blind-starters-content.test.sh` (or a stack test) covering a signature token + valid manifest.
-5. If the language needs deeper, on-demand rules, create `skills/clean-code-<x>/SKILL.md` (frontmatter `name` + trigger `description`, lean body) and wire it in `install.sh`.
+5. If the language needs deeper, on-demand rules, create `skills/clean-code-<x>/SKILL.md` (frontmatter `name` + trigger `description`, lean body) — the plugin auto-discovers `skills/`.
 
 ## Principles
 - The project `CLAUDE.md` is always in context — keep it tight; put depth in the on-demand skill, not here.

@@ -8,8 +8,9 @@
 
 Candidate agents for the `claude-starters` system, captured for a later
 session. Build them the same way as existing agents: `agents/<name>.md`
-(frontmatter `name` + trigger `description` + `tools` + body), symlinked
-into `~/.claude/agents/` by `install.sh`, with a content/install test.
+(frontmatter `name` + trigger `description` + `tools` + body) in `agents/`
+(global) or `agent-library/` (scoped), auto-discovered by the plugin, with
+a content test.
 
 **Status legend:** ✅ built · ⭐ proposed next batch · ⬜ backlog
 
@@ -141,7 +142,8 @@ assistant + superpowers with no distinct artifact.
 ## Related system upgrades (non-agent)
 - ✅ `SessionStart` detection hook (Trigger 2) — offers a starter on existing repos, opt-in, non-destructive, zero repo footprint. BUILT.
 - ✅ CI (GitHub Action: suite + shellcheck). BUILT.
-- ⬜ Applier ergonomics: `--list`, `--dry-run`, and an `update`/sync path (vs the current no-clobber refusal).
+- ✅ Applier ergonomics: `--list`, `--dry-run`, `--print`, `--no-agents`, `--force`, and the `--update` managed-block path. BUILT (v1.1.0).
+- ⬜ **opencode port** — opencode reads `~/.claude/` natively but not the Claude Code plugin marketplace. The old `install.sh` bridge was removed (caused duplicate registrations alongside the plugin). Design a proper opencode integration later (e.g. an opencode-specific install/symlink step, or opencode plugin support).
 
 ## Next session
 Pick from ⭐ first (recommended: the three audio agents — nothing else covers

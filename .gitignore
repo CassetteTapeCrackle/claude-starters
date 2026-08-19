@@ -1,9 +1,3 @@
 # Runtime / local
 .DS_Store
 *.log
-
-# Personal / non-plugin bridge (not shipped)
-install.sh
-tests/install.test.sh
-tests/install-skills.test.sh
-tests/global-layer.test.sh

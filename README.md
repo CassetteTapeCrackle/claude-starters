@@ -62,10 +62,10 @@ See `docs/agent-ideas-backlog.md` for the full catalogue.
 
 ## Extend
 Add `starters/<stack>/{CLAUDE.md,manifest.json}` + a content test; optionally
-a `skills/clean-code-<x>/SKILL.md` wired in `install.sh`. Or ask the
+a `skills/clean-code-<x>/SKILL.md` (auto-discovered by the plugin). Or ask the
 `starter-author` agent. Everything is TDD'd (plain-bash harness) and
 shellcheck-clean.
 
 ## Test
     for t in tests/*.test.sh; do bash "$t"; done
-    shellcheck bin/apply-starter.sh install.sh tests/*.sh
+    shellcheck bin/apply-starter.sh hooks/*.sh tests/*.sh
