@@ -16,7 +16,7 @@ jobs:
       - uses: actions/checkout@v7
 
       # several content tests shell out to python3 for JSON validation
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with:
           python-version: '3.x'
 
