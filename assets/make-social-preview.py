@@ -15,7 +15,7 @@ import pathlib
 
 W, H = 1280, 640
 BG, CLAY, INK, MUTED, RULE = "#F0EEE6", "#C9603C", "#1F1E1D", "#6B6862", "#CFC9BE"
-BRACKET, STEM_G, SOIL = "#D97757", "#2E7044", "#B8875F"
+BRACKET, STEM_G, SOIL = "#D97757", "#35784A", "#B8875F"
 SPARK_C = "#B9B2A6"
 
 # ---- mark geometry -------------------------------------------------------
@@ -75,6 +75,9 @@ SPARK = [(62, 112), (250, 104), (470, 168), (498, 300), (46, 300),
          (472, 508), (196, 586), (648, 588), (1000, 602), (1170, 96), (316, 602)]
 
 DSC = 2
+BRACE_RAMP = [16, 15, 13, 12, 10, 9, 8, 7]   # dots per 16-cell Bayer block;
+                                             # floor stays high or the spine
+                                             # goes translucent mid-bracket
 
 def dither(name, light_bg, dot, on):
     order = [0,8,2,10, 12,4,14,6, 3,11,1,9, 15,7,13,5]     # Bayer 4x4
@@ -89,16 +92,33 @@ def block(row, c0, c1, rows, fill):
     return (f'<rect x="{X0 + c0*UW}" y="{Y0 + row*UH}" '
             f'width="{(c1-c0+1)*UW - GAP}" height="{rows*UH - GAP}" fill="{fill}"/>')
 
-body = [
-    block(0, *SPINE_L, ROWS, "url(#brace)"),
-    block(0, *SPINE_R, ROWS, "url(#brace)"),
-]
+BRACE_STEPS = len(BRACE_RAMP)   # dither ramp: 0 = solid, last = lightest
+
+def brace_density(row):
+    """Solid at the base, dissolving upward — the frame reads as growing with
+    the plant rather than draining into the ground."""
+    up = (ROWS - 1 - row) / (ROWS - 1)
+    return min(BRACE_STEPS - 1, int(up * BRACE_STEPS))
+
+def spine(c0, c1):
+    """One continuous spine, banded by density. No GAP between bands, or the
+    ramp would read as a stack of separate slabs."""
+    out = []
+    for r in range(ROWS):
+        out.append(f'<rect x="{X0 + c0*UW}" y="{Y0 + r*UH}" '
+                   f'width="{(c1-c0+1)*UW - GAP}" height="{UH}" '
+                   f'fill="url(#brace{brace_density(r)})"/>')
+    return out
+
+body = spine(*SPINE_L) + spine(*SPINE_R)
 for r0, th in ARM_ROWS:
-    body.append(block(r0, *ARM_L, th, "url(#brace)"))
-    body.append(block(r0, *ARM_R, th, "url(#brace)"))
+    d = brace_density(r0)          # arms join the ramp, or the corner
+                                   # jumps back to solid below a faded spine
+    body.append(block(r0, *ARM_L, th, f"url(#brace{d})"))
+    body.append(block(r0, *ARM_R, th, f"url(#brace{d})"))
 
 for row, c0, c1, rows in STEM:
-    body.append(block(row, c0, c1, rows, "url(#d75)"))
+    body.append(block(row, c0, c1, rows, STEM_G))
 for row, c0, c1, dens in LEAVES:
     body.append(block(row, c0, c1, 1, f"url(#{dens})"))
 for row, c0, c1 in SOIL_ROWS:
@@ -147,7 +167,7 @@ svg = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{
     {dither("d50", "#E8F1E7", "#3C8552", 8)}
     {dither("d75", "#E8F1E7", "#2A6740", 12)}
     {dither("soil", "#EDE3D8", "#B8875F", 9)}
-    {dither("brace", "#D97757", "#E29A80", 6)}
+    {"".join(dither(f"brace{i}", "#F0EEE6", "#D97757", d) for i, d in enumerate(BRACE_RAMP))}
   </defs>
   <rect width="{W}" height="{H}" fill="{BG}"/>
   {sparks}

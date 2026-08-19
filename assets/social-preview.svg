@@ -4,17 +4,83 @@
     <pattern id="d50" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="#E8F1E7"/><rect x="0" y="0" width="2" height="2" fill="#3C8552"/><rect x="4" y="0" width="2" height="2" fill="#3C8552"/><rect x="2" y="2" width="2" height="2" fill="#3C8552"/><rect x="6" y="2" width="2" height="2" fill="#3C8552"/><rect x="0" y="4" width="2" height="2" fill="#3C8552"/><rect x="4" y="4" width="2" height="2" fill="#3C8552"/><rect x="2" y="6" width="2" height="2" fill="#3C8552"/><rect x="6" y="6" width="2" height="2" fill="#3C8552"/></pattern>
     <pattern id="d75" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="#E8F1E7"/><rect x="0" y="0" width="2" height="2" fill="#2A6740"/><rect x="2" y="0" width="2" height="2" fill="#2A6740"/><rect x="4" y="0" width="2" height="2" fill="#2A6740"/><rect x="6" y="0" width="2" height="2" fill="#2A6740"/><rect x="2" y="2" width="2" height="2" fill="#2A6740"/><rect x="6" y="2" width="2" height="2" fill="#2A6740"/><rect x="0" y="4" width="2" height="2" fill="#2A6740"/><rect x="2" y="4" width="2" height="2" fill="#2A6740"/><rect x="4" y="4" width="2" height="2" fill="#2A6740"/><rect x="6" y="4" width="2" height="2" fill="#2A6740"/><rect x="2" y="6" width="2" height="2" fill="#2A6740"/><rect x="6" y="6" width="2" height="2" fill="#2A6740"/></pattern>
     <pattern id="soil" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="#EDE3D8"/><rect x="0" y="0" width="2" height="2" fill="#B8875F"/><rect x="2" y="0" width="2" height="2" fill="#B8875F"/><rect x="4" y="0" width="2" height="2" fill="#B8875F"/><rect x="2" y="2" width="2" height="2" fill="#B8875F"/><rect x="6" y="2" width="2" height="2" fill="#B8875F"/><rect x="0" y="4" width="2" height="2" fill="#B8875F"/><rect x="4" y="4" width="2" height="2" fill="#B8875F"/><rect x="2" y="6" width="2" height="2" fill="#B8875F"/><rect x="6" y="6" width="2" height="2" fill="#B8875F"/></pattern>
-    <pattern id="brace" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="#D97757"/><rect x="0" y="0" width="2" height="2" fill="#E29A80"/><rect x="4" y="0" width="2" height="2" fill="#E29A80"/><rect x="2" y="2" width="2" height="2" fill="#E29A80"/><rect x="0" y="4" width="2" height="2" fill="#E29A80"/><rect x="4" y="4" width="2" height="2" fill="#E29A80"/><rect x="6" y="6" width="2" height="2" fill="#E29A80"/></pattern>
+    <pattern id="brace0" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="#F0EEE6"/><rect x="0" y="0" width="2" height="2" fill="#D97757"/><rect x="2" y="0" width="2" height="2" fill="#D97757"/><rect x="4" y="0" width="2" height="2" fill="#D97757"/><rect x="6" y="0" width="2" height="2" fill="#D97757"/><rect x="0" y="2" width="2" height="2" fill="#D97757"/><rect x="2" y="2" width="2" height="2" fill="#D97757"/><rect x="4" y="2" width="2" height="2" fill="#D97757"/><rect x="6" y="2" width="2" height="2" fill="#D97757"/><rect x="0" y="4" width="2" height="2" fill="#D97757"/><rect x="2" y="4" width="2" height="2" fill="#D97757"/><rect x="4" y="4" width="2" height="2" fill="#D97757"/><rect x="6" y="4" width="2" height="2" fill="#D97757"/><rect x="0" y="6" width="2" height="2" fill="#D97757"/><rect x="2" y="6" width="2" height="2" fill="#D97757"/><rect x="4" y="6" width="2" height="2" fill="#D97757"/><rect x="6" y="6" width="2" height="2" fill="#D97757"/></pattern><pattern id="brace1" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="#F0EEE6"/><rect x="0" y="0" width="2" height="2" fill="#D97757"/><rect x="2" y="0" width="2" height="2" fill="#D97757"/><rect x="4" y="0" width="2" height="2" fill="#D97757"/><rect x="6" y="0" width="2" height="2" fill="#D97757"/><rect x="0" y="2" width="2" height="2" fill="#D97757"/><rect x="2" y="2" width="2" height="2" fill="#D97757"/><rect x="4" y="2" width="2" height="2" fill="#D97757"/><rect x="6" y="2" width="2" height="2" fill="#D97757"/><rect x="0" y="4" width="2" height="2" fill="#D97757"/><rect x="2" y="4" width="2" height="2" fill="#D97757"/><rect x="4" y="4" width="2" height="2" fill="#D97757"/><rect x="6" y="4" width="2" height="2" fill="#D97757"/><rect x="2" y="6" width="2" height="2" fill="#D97757"/><rect x="4" y="6" width="2" height="2" fill="#D97757"/><rect x="6" y="6" width="2" height="2" fill="#D97757"/></pattern><pattern id="brace2" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="#F0EEE6"/><rect x="0" y="0" width="2" height="2" fill="#D97757"/><rect x="2" y="0" width="2" height="2" fill="#D97757"/><rect x="4" y="0" width="2" height="2" fill="#D97757"/><rect x="6" y="0" width="2" height="2" fill="#D97757"/><rect x="0" y="2" width="2" height="2" fill="#D97757"/><rect x="2" y="2" width="2" height="2" fill="#D97757"/><rect x="6" y="2" width="2" height="2" fill="#D97757"/><rect x="0" y="4" width="2" height="2" fill="#D97757"/><rect x="2" y="4" width="2" height="2" fill="#D97757"/><rect x="4" y="4" width="2" height="2" fill="#D97757"/><rect x="6" y="4" width="2" height="2" fill="#D97757"/><rect x="2" y="6" width="2" height="2" fill="#D97757"/><rect x="6" y="6" width="2" height="2" fill="#D97757"/></pattern><pattern id="brace3" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="#F0EEE6"/><rect x="0" y="0" width="2" height="2" fill="#D97757"/><rect x="2" y="0" width="2" height="2" fill="#D97757"/><rect x="4" y="0" width="2" height="2" fill="#D97757"/><rect x="6" y="0" width="2" height="2" fill="#D97757"/><rect x="2" y="2" width="2" height="2" fill="#D97757"/><rect x="6" y="2" width="2" height="2" fill="#D97757"/><rect x="0" y="4" width="2" height="2" fill="#D97757"/><rect x="2" y="4" width="2" height="2" fill="#D97757"/><rect x="4" y="4" width="2" height="2" fill="#D97757"/><rect x="6" y="4" width="2" height="2" fill="#D97757"/><rect x="2" y="6" width="2" height="2" fill="#D97757"/><rect x="6" y="6" width="2" height="2" fill="#D97757"/></pattern><pattern id="brace4" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="#F0EEE6"/><rect x="0" y="0" width="2" height="2" fill="#D97757"/><rect x="2" y="0" width="2" height="2" fill="#D97757"/><rect x="4" y="0" width="2" height="2" fill="#D97757"/><rect x="2" y="2" width="2" height="2" fill="#D97757"/><rect x="6" y="2" width="2" height="2" fill="#D97757"/><rect x="0" y="4" width="2" height="2" fill="#D97757"/><rect x="4" y="4" width="2" height="2" fill="#D97757"/><rect x="6" y="4" width="2" height="2" fill="#D97757"/><rect x="2" y="6" width="2" height="2" fill="#D97757"/><rect x="6" y="6" width="2" height="2" fill="#D97757"/></pattern><pattern id="brace5" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="#F0EEE6"/><rect x="0" y="0" width="2" height="2" fill="#D97757"/><rect x="2" y="0" width="2" height="2" fill="#D97757"/><rect x="4" y="0" width="2" height="2" fill="#D97757"/><rect x="2" y="2" width="2" height="2" fill="#D97757"/><rect x="6" y="2" width="2" height="2" fill="#D97757"/><rect x="0" y="4" width="2" height="2" fill="#D97757"/><rect x="4" y="4" width="2" height="2" fill="#D97757"/><rect x="2" y="6" width="2" height="2" fill="#D97757"/><rect x="6" y="6" width="2" height="2" fill="#D97757"/></pattern><pattern id="brace6" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="#F0EEE6"/><rect x="0" y="0" width="2" height="2" fill="#D97757"/><rect x="4" y="0" width="2" height="2" fill="#D97757"/><rect x="2" y="2" width="2" height="2" fill="#D97757"/><rect x="6" y="2" width="2" height="2" fill="#D97757"/><rect x="0" y="4" width="2" height="2" fill="#D97757"/><rect x="4" y="4" width="2" height="2" fill="#D97757"/><rect x="2" y="6" width="2" height="2" fill="#D97757"/><rect x="6" y="6" width="2" height="2" fill="#D97757"/></pattern><pattern id="brace7" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="#F0EEE6"/><rect x="0" y="0" width="2" height="2" fill="#D97757"/><rect x="4" y="0" width="2" height="2" fill="#D97757"/><rect x="2" y="2" width="2" height="2" fill="#D97757"/><rect x="6" y="2" width="2" height="2" fill="#D97757"/><rect x="0" y="4" width="2" height="2" fill="#D97757"/><rect x="4" y="4" width="2" height="2" fill="#D97757"/><rect x="6" y="6" width="2" height="2" fill="#D97757"/></pattern>
   </defs>
   <rect width="1280" height="640" fill="#F0EEE6"/>
   <text x="62" y="112" font-family="Menlo, monospace" font-size="19" fill="#B9B2A6" opacity="0.9">*</text><text x="250" y="104" font-family="Menlo, monospace" font-size="19" fill="#B9B2A6" opacity="0.9">*</text><text x="470" y="168" font-family="Menlo, monospace" font-size="19" fill="#B9B2A6" opacity="0.9">*</text><text x="498" y="300" font-family="Menlo, monospace" font-size="19" fill="#B9B2A6" opacity="0.9">*</text><text x="46" y="300" font-family="Menlo, monospace" font-size="19" fill="#B9B2A6" opacity="0.9">*</text><text x="472" y="508" font-family="Menlo, monospace" font-size="19" fill="#B9B2A6" opacity="0.9">*</text><text x="196" y="586" font-family="Menlo, monospace" font-size="19" fill="#B9B2A6" opacity="0.9">*</text><text x="648" y="588" font-family="Menlo, monospace" font-size="19" fill="#B9B2A6" opacity="0.9">*</text><text x="1000" y="602" font-family="Menlo, monospace" font-size="19" fill="#B9B2A6" opacity="0.9">*</text><text x="1170" y="96" font-family="Menlo, monospace" font-size="19" fill="#B9B2A6" opacity="0.9">*</text><text x="316" y="602" font-family="Menlo, monospace" font-size="19" fill="#B9B2A6" opacity="0.9">*</text>
-  <rect x="74" y="133" width="27" height="373" fill="url(#brace)"/>
-  <rect x="438" y="133" width="27" height="373" fill="url(#brace)"/>
-  <rect x="102" y="133" width="69" height="21" fill="url(#brace)"/>
-  <rect x="368" y="133" width="69" height="21" fill="url(#brace)"/>
-  <rect x="102" y="485" width="69" height="21" fill="url(#brace)"/>
-  <rect x="368" y="485" width="69" height="21" fill="url(#brace)"/>
-  <rect x="256" y="188" width="13" height="263" fill="url(#d75)"/>
+  <rect x="74" y="133" width="27" height="11" fill="url(#brace7)"/>
+  <rect x="74" y="144" width="27" height="11" fill="url(#brace7)"/>
+  <rect x="74" y="155" width="27" height="11" fill="url(#brace7)"/>
+  <rect x="74" y="166" width="27" height="11" fill="url(#brace7)"/>
+  <rect x="74" y="177" width="27" height="11" fill="url(#brace7)"/>
+  <rect x="74" y="188" width="27" height="11" fill="url(#brace6)"/>
+  <rect x="74" y="199" width="27" height="11" fill="url(#brace6)"/>
+  <rect x="74" y="210" width="27" height="11" fill="url(#brace6)"/>
+  <rect x="74" y="221" width="27" height="11" fill="url(#brace6)"/>
+  <rect x="74" y="232" width="27" height="11" fill="url(#brace5)"/>
+  <rect x="74" y="243" width="27" height="11" fill="url(#brace5)"/>
+  <rect x="74" y="254" width="27" height="11" fill="url(#brace5)"/>
+  <rect x="74" y="265" width="27" height="11" fill="url(#brace5)"/>
+  <rect x="74" y="276" width="27" height="11" fill="url(#brace4)"/>
+  <rect x="74" y="287" width="27" height="11" fill="url(#brace4)"/>
+  <rect x="74" y="298" width="27" height="11" fill="url(#brace4)"/>
+  <rect x="74" y="309" width="27" height="11" fill="url(#brace4)"/>
+  <rect x="74" y="320" width="27" height="11" fill="url(#brace3)"/>
+  <rect x="74" y="331" width="27" height="11" fill="url(#brace3)"/>
+  <rect x="74" y="342" width="27" height="11" fill="url(#brace3)"/>
+  <rect x="74" y="353" width="27" height="11" fill="url(#brace3)"/>
+  <rect x="74" y="364" width="27" height="11" fill="url(#brace2)"/>
+  <rect x="74" y="375" width="27" height="11" fill="url(#brace2)"/>
+  <rect x="74" y="386" width="27" height="11" fill="url(#brace2)"/>
+  <rect x="74" y="397" width="27" height="11" fill="url(#brace2)"/>
+  <rect x="74" y="408" width="27" height="11" fill="url(#brace1)"/>
+  <rect x="74" y="419" width="27" height="11" fill="url(#brace1)"/>
+  <rect x="74" y="430" width="27" height="11" fill="url(#brace1)"/>
+  <rect x="74" y="441" width="27" height="11" fill="url(#brace1)"/>
+  <rect x="74" y="452" width="27" height="11" fill="url(#brace0)"/>
+  <rect x="74" y="463" width="27" height="11" fill="url(#brace0)"/>
+  <rect x="74" y="474" width="27" height="11" fill="url(#brace0)"/>
+  <rect x="74" y="485" width="27" height="11" fill="url(#brace0)"/>
+  <rect x="74" y="496" width="27" height="11" fill="url(#brace0)"/>
+  <rect x="438" y="133" width="27" height="11" fill="url(#brace7)"/>
+  <rect x="438" y="144" width="27" height="11" fill="url(#brace7)"/>
+  <rect x="438" y="155" width="27" height="11" fill="url(#brace7)"/>
+  <rect x="438" y="166" width="27" height="11" fill="url(#brace7)"/>
+  <rect x="438" y="177" width="27" height="11" fill="url(#brace7)"/>
+  <rect x="438" y="188" width="27" height="11" fill="url(#brace6)"/>
+  <rect x="438" y="199" width="27" height="11" fill="url(#brace6)"/>
+  <rect x="438" y="210" width="27" height="11" fill="url(#brace6)"/>
+  <rect x="438" y="221" width="27" height="11" fill="url(#brace6)"/>
+  <rect x="438" y="232" width="27" height="11" fill="url(#brace5)"/>
+  <rect x="438" y="243" width="27" height="11" fill="url(#brace5)"/>
+  <rect x="438" y="254" width="27" height="11" fill="url(#brace5)"/>
+  <rect x="438" y="265" width="27" height="11" fill="url(#brace5)"/>
+  <rect x="438" y="276" width="27" height="11" fill="url(#brace4)"/>
+  <rect x="438" y="287" width="27" height="11" fill="url(#brace4)"/>
+  <rect x="438" y="298" width="27" height="11" fill="url(#brace4)"/>
+  <rect x="438" y="309" width="27" height="11" fill="url(#brace4)"/>
+  <rect x="438" y="320" width="27" height="11" fill="url(#brace3)"/>
+  <rect x="438" y="331" width="27" height="11" fill="url(#brace3)"/>
+  <rect x="438" y="342" width="27" height="11" fill="url(#brace3)"/>
+  <rect x="438" y="353" width="27" height="11" fill="url(#brace3)"/>
+  <rect x="438" y="364" width="27" height="11" fill="url(#brace2)"/>
+  <rect x="438" y="375" width="27" height="11" fill="url(#brace2)"/>
+  <rect x="438" y="386" width="27" height="11" fill="url(#brace2)"/>
+  <rect x="438" y="397" width="27" height="11" fill="url(#brace2)"/>
+  <rect x="438" y="408" width="27" height="11" fill="url(#brace1)"/>
+  <rect x="438" y="419" width="27" height="11" fill="url(#brace1)"/>
+  <rect x="438" y="430" width="27" height="11" fill="url(#brace1)"/>
+  <rect x="438" y="441" width="27" height="11" fill="url(#brace1)"/>
+  <rect x="438" y="452" width="27" height="11" fill="url(#brace0)"/>
+  <rect x="438" y="463" width="27" height="11" fill="url(#brace0)"/>
+  <rect x="438" y="474" width="27" height="11" fill="url(#brace0)"/>
+  <rect x="438" y="485" width="27" height="11" fill="url(#brace0)"/>
+  <rect x="438" y="496" width="27" height="11" fill="url(#brace0)"/>
+  <rect x="102" y="133" width="69" height="21" fill="url(#brace7)"/>
+  <rect x="368" y="133" width="69" height="21" fill="url(#brace7)"/>
+  <rect x="102" y="485" width="69" height="21" fill="url(#brace0)"/>
+  <rect x="368" y="485" width="69" height="21" fill="url(#brace0)"/>
+  <rect x="256" y="188" width="13" height="263" fill="#35784A"/>
   <rect x="256" y="166" width="13" height="10" fill="url(#d50)"/>
   <rect x="256" y="177" width="13" height="10" fill="url(#d75)"/>
   <rect x="200" y="243" width="55" height="10" fill="url(#d50)"/>
