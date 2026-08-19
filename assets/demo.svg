@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 412" width="900" height="412" role="img"
-     aria-label="Terminal demo. Running /apply-starter rust --framework axum prints 'Applied rust starter (framework: axum) to .' It writes a CLAUDE.md with the framework pinned to axum, activates 14 stack-specific agents out of a 76-agent library, and arms the clean-code-rust depth skill which stays idle until you touch Rust code. Running git status --short then prints nothing, because the generated files are listed in .git/info/exclude rather than .gitignore, so they are never committed and teammates never see them.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 372" width="900" height="372" role="img"
+     aria-label="Terminal demo. Running /apply-starter rust --framework axum prints 'Applied rust starter (framework: axum) to .' It writes a CLAUDE.md with the framework pinned to axum, activates 14 stack-specific agents out of a 76-agent library, and arms the clean-code-rust depth skill which stays idle until you touch Rust code. Running git status --short then prints nothing, because the starter adds zero files to your repo.">
   <title>claude-starters — one command per stack, zero repo footprint</title>
   <defs>
     <style>
@@ -48,7 +48,7 @@
     <clipPath id="clip2"><rect x="42" y="236" width="162" height="24"/></clipPath>
   </defs>
 
-  <rect class="win" x="0.5" y="0.5" width="899" height="411" rx="12"/>
+  <rect class="win" x="0.5" y="0.5" width="899" height="371" rx="12"/>
   <path class="bar" d="M0.5 12.5a12 12 0 0 1 12-12h875a12 12 0 0 1 12 12V36H0.5Z"/>
   <circle cx="24" cy="18" r="5.5" fill="#ff5f57"/>
   <circle cx="44" cy="18" r="5.5" fill="#febc2e"/>
@@ -78,14 +78,13 @@
     <rect class="cur cur2" x="42" y="240" width="9" height="18" opacity="0"/>
   </g>
 
-  <rect class="rule a7" x="44" y="272" width="3" height="58" rx="1.5"/>
+  <rect class="rule a7" x="44" y="272" width="3" height="30" rx="1.5"/>
   <g class="ann">
-    <text class="des a7" x="64" y="290">no output. the generated files are listed in <tspan class="key">.git/info/exclude</tspan>,</text>
-    <text class="des a8" x="64" y="318">never in <tspan class="key">.gitignore</tspan> &#8212; nothing to commit, teammates see nothing.</text>
+    <text class="des a7" x="64" y="290">no output &#8212; the starter added <tspan class="key">zero files</tspan> to your repo.</text>
   </g>
 
   <g class="mono">
-    <text class="ps1 a9" x="24" y="368">&#10095;</text>
-    <g class="a9"><rect class="cur blinker" x="42" y="354" width="9" height="18"/></g>
+    <text class="ps1 a9" x="24" y="330">&#10095;</text>
+    <g class="a9"><rect class="cur blinker" x="42" y="316" width="9" height="18"/></g>
   </g>
 </svg>

@@ -19,9 +19,9 @@ BRACKET, STEM_G, SOIL = "#D97757", "#2E7044", "#B8875F"
 SPARK_C = "#B9B2A6"
 
 # ---- mark geometry -------------------------------------------------------
-UW, UH, GAP = 12, 8, 1          # fine grid: still wide slabs, ~2.5x more detail
+UW, UH, GAP = 14, 11, 1         # sized so the mark matches the copy block's height
 COLS, ROWS = 28, 34
-X0 = 92
+X0 = 74
 Y0 = (H - ROWS * UH) // 2
 
 SPINE_L, SPINE_R = (0, 1), (26, 27)
@@ -34,16 +34,16 @@ ARM_ROWS = ((0, 2), (32, 2))     # (start_row, thickness)
 BUD     = [(3, 13, 14, "d50"), (4, 12, 15, "d75"), (5, 12, 15, "d75")]
 
 UPPER_R = [(6, 19, 22, "d25"), (7, 17, 22, "d50"), (8, 15, 21, "d75"), (9, 15, 18, "d50")]
-UPPER_L = [(8, 5, 8, "d25"), (9, 5, 10, "d50"), (10, 6, 12, "d75"), (11, 9, 12, "d50")]
+UPPER_L = [(7, 5, 8, "d25"), (8, 5, 10, "d50"), (9, 6, 12, "d75"), (10, 9, 12, "d50")]
 
-LOWER_R = [(15, 17, 21, "d25"), (16, 15, 22, "d50"), (17, 15, 20, "d50"), (18, 15, 17, "d25")]
-LOWER_L = [(17, 6, 11, "d25"), (18, 4, 12, "d50"), (19, 6, 12, "d50"), (20, 9, 12, "d25")]
+LOWER_R = [(17, 17, 21, "d25"), (18, 15, 22, "d50"), (19, 15, 20, "d50"), (20, 15, 17, "d25")]
+LOWER_L = [(19, 6, 11, "d25"), (20, 5, 12, "d50"), (21, 6, 12, "d50"), (22, 9, 12, "d25")]
 
 LEAVES = BUD + UPPER_R + UPPER_L + LOWER_R + LOWER_L
 
 STEM = [(5, 13, 13, 12),                       # (row, c0, c1, rows) solid
-        (17, 13, 14, 12)]                      # tapers wider toward the soil
-SOIL_ROWS = [(29, 10, 17), (30, 8, 19), (31, 6, 21)]
+        (17, 13, 14, 11)]                      # tapers wider toward the soil
+SOIL_ROWS = [(28, 10, 17), (29, 9, 18), (30, 8, 19)]
 
 # ---- copy ----------------------------------------------------------------
 TX, CX, DX = 560, 596, 716
@@ -73,12 +73,12 @@ def block(row, c0, c1, rows, fill):
             f'width="{(c1-c0+1)*UW - GAP}" height="{rows*UH - GAP}" fill="{fill}"/>')
 
 body = [
-    block(0, *SPINE_L, ROWS, BRACKET),
-    block(0, *SPINE_R, ROWS, BRACKET),
+    block(0, *SPINE_L, ROWS, "url(#brace)"),
+    block(0, *SPINE_R, ROWS, "url(#brace)"),
 ]
 for r0, th in ARM_ROWS:
-    body.append(block(r0, *ARM_L, th, BRACKET))
-    body.append(block(r0, *ARM_R, th, BRACKET))
+    body.append(block(r0, *ARM_L, th, "url(#brace)"))
+    body.append(block(r0, *ARM_R, th, "url(#brace)"))
 
 for row, c0, c1, rows in STEM:
     body.append(block(row, c0, c1, rows, STEM_G))
@@ -87,9 +87,15 @@ for row, c0, c1, dens in LEAVES:
 for row, c0, c1 in SOIL_ROWS:
     body.append(block(row, c0, c1, 1, "url(#soil)"))
 
-# guard: nothing may stray onto the bracket spines
+# guard: the plant keeps 3 clear cells from the spines and never reaches the
+# arm rows, so it can't visually fuse with the frame.
+SAFE_C, SAFE_R = (5, 22), (3, 30)
 for row, c0, c1, *_ in LEAVES:
-    assert 2 <= c0 <= c1 <= 25, f"leaf row {row} hits the frame: {c0}..{c1}"
+    assert SAFE_C[0] <= c0 <= c1 <= SAFE_C[1], f"leaf row {row} crowds the frame: {c0}..{c1}"
+    assert SAFE_R[0] <= row <= SAFE_R[1], f"leaf row {row} outside safe rows"
+for row, c0, c1 in SOIL_ROWS:
+    assert SAFE_C[0] <= c0 <= c1 <= SAFE_C[1], f"soil row {row} crowds the frame: {c0}..{c1}"
+    assert row <= SAFE_R[1], f"soil row {row} reaches the arm rows"
 
 sparks = "".join(
     f'<text x="{x}" y="{y}" font-family="Menlo, monospace" font-size="19" '
@@ -102,6 +108,7 @@ svg = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{
     {dither("d50", "#E8F1E7", "#3C8552", 8)}
     {dither("d75", "#E8F1E7", "#2A6740", 12)}
     {dither("soil", "#EDE3D8", "#B8875F", 9)}
+    {dither("brace", "#D97757", "#EBA98F", 3)}
   </defs>
   <rect width="{W}" height="{H}" fill="{BG}"/>
   {sparks}
