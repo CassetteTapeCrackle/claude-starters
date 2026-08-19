@@ -1,0 +1,31 @@
+name: New starter request
+description: Suggest a language, framework, or domain that should have a starter.
+labels: [starter-request]
+body:
+  - type: input
+    id: stack
+    attributes:
+      label: Stack
+      placeholder: elixir, zig, unity, …
+    validations: { required: true }
+  - type: textarea
+    id: rules
+    attributes:
+      label: What rules actually matter here?
+      description: >
+        The point of a starter is the stack-specific handful — the things an agent
+        gets wrong in this ecosystem. General good practice doesn't need a starter.
+      placeholder: |
+        - supervision trees, not try/catch
+        - pattern-match on {:ok, _} / {:error, _}
+    validations: { required: true }
+  - type: input
+    id: frameworks
+    attributes:
+      label: Frameworks worth pinning
+      placeholder: phoenix, nerves
+  - type: textarea
+    id: agents
+    attributes:
+      label: Specialist agents worth having
+      placeholder: e.g. a genserver-state-auditor, a supervision-tree-checker

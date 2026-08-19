@@ -8,6 +8,10 @@ set -euo pipefail
 trap 'exit 0' ERR   # fail-safe: never wedge the session
 dir="$PWD"
 
+# Opt-out via plugin userConfig. `case` (not `[ ] &&`) so a non-match cannot
+# trip the ERR trap. Unset/empty means enabled, preserving default behaviour.
+case "${CLAUDE_PLUGIN_OPTION_SUGGEST_ON_EXISTING_REPOS:-}" in false|0|off) exit 0 ;; esac
+
 root="$(git -C "$dir" rev-parse --show-toplevel 2>/dev/null || true)"
 [ -n "$root" ] || exit 0
 
