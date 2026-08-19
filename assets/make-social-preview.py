@@ -30,20 +30,22 @@ ARM_ROWS = ((0, 2), (32, 2))     # (start_row, thickness)
 
 # (row, col_start, col_end, density) — density carries depth: d25 sits back,
 # d75 comes forward, so overlapping leaves separate without outlines.
-# Two opposite leaf pairs plus a terminal bud: reads as a sprout, not a conifer.
-BUD     = [(3, 13, 14, "d50"), (4, 12, 15, "d75"), (5, 12, 15, "d75")]
+# The stem is a uniform two cells wide: a one-sided taper left the right-hand
+# leaves with a one-cell gap and made them float.
+BUD     = [(3, 13, 14, "d50"), (4, 13, 14, "d75")]
 
-UPPER_R = [(6, 19, 22, "d25"), (7, 17, 22, "d50"), (8, 15, 21, "d75"), (9, 15, 18, "d50")]
-UPPER_L = [(7, 5, 8, "d25"), (8, 5, 10, "d50"), (9, 6, 12, "d75"), (10, 9, 12, "d50")]
+# Leaves alternate down the stem rather than sitting in opposite pairs — level
+# pairs read as a crossbar driven through the trunk.
+UPPER_L = [(6, 5, 8, "d25"), (7, 5, 10, "d50"), (8, 6, 12, "d75"), (9, 9, 12, "d50")]
+UPPER_R = [(11, 19, 22, "d25"), (12, 17, 22, "d50"), (13, 15, 22, "d75"), (14, 15, 18, "d50")]
 
-LOWER_R = [(17, 17, 21, "d25"), (18, 15, 22, "d50"), (19, 15, 20, "d50"), (20, 15, 17, "d25")]
-LOWER_L = [(19, 6, 11, "d25"), (20, 5, 12, "d50"), (21, 6, 12, "d50"), (22, 9, 12, "d25")]
+LOWER_L = [(17, 6, 11, "d25"), (18, 5, 12, "d50"), (19, 6, 12, "d75"), (20, 9, 12, "d50")]
+LOWER_R = [(22, 17, 21, "d25"), (23, 15, 21, "d50"), (24, 15, 20, "d75"), (25, 15, 17, "d50")]
 
-LEAVES = BUD + UPPER_R + UPPER_L + LOWER_R + LOWER_L
+LEAVES = BUD + UPPER_L + UPPER_R + LOWER_R + LOWER_L
 
-STEM = [(5, 13, 13, 12),                       # (row, c0, c1, rows) solid
-        (17, 13, 14, 11)]                      # tapers wider toward the soil
-SOIL_ROWS = [(28, 10, 17), (29, 9, 18), (30, 8, 19)]
+STEM = [(5, 13, 14, 24)]                       # (row, c0, c1, rows) solid, uniform
+SOIL_ROWS = [(29, 8, 19), (30, 7, 20)]         # two courses, not a stepped plinth
 
 # ---- copy ----------------------------------------------------------------
 TX, CX, DX = 560, 596, 716
@@ -97,6 +99,28 @@ for row, c0, c1 in SOIL_ROWS:
     assert SAFE_C[0] <= c0 <= c1 <= SAFE_C[1], f"soil row {row} crowds the frame: {c0}..{c1}"
     assert row <= SAFE_R[1], f"soil row {row} reaches the arm rows"
 
+# Every leaf slab must reach the stem through its neighbours. Without this a
+# slab can sit one cell clear of the stem and silently render as a floating
+# object — which is exactly what the one-sided taper used to cause.
+_cells = {}
+for _row, _c0, _c1, _rows in STEM:
+    for _r in range(_row, _row + _rows):
+        for _c in range(_c0, _c1 + 1):
+            _cells[(_c, _r)] = "stem"
+for _row, _c0, _c1, _d in LEAVES:
+    for _c in range(_c0, _c1 + 1):
+        _cells.setdefault((_c, _row), "leaf")
+_seen = {q for q, v in _cells.items() if v == "stem"}
+_stack = list(_seen)
+while _stack:
+    _c, _r = _stack.pop()
+    for _n in ((_c+1, _r), (_c-1, _r), (_c, _r+1), (_c, _r-1)):
+        if _n in _cells and _n not in _seen:
+            _seen.add(_n); _stack.append(_n)
+for _row, _c0, _c1, _d in LEAVES:
+    assert any((_c, _row) in _seen for _c in range(_c0, _c1 + 1)), \
+        f"leaf slab row {_row} cols {_c0}-{_c1} floats free of the stem"
+
 sparks = "".join(
     f'<text x="{x}" y="{y}" font-family="Menlo, monospace" font-size="19" '
     f'fill="{SPARK_C}" opacity="0.9">*</text>' for x, y in SPARK)
@@ -108,7 +132,7 @@ svg = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{
     {dither("d50", "#E8F1E7", "#3C8552", 8)}
     {dither("d75", "#E8F1E7", "#2A6740", 12)}
     {dither("soil", "#EDE3D8", "#B8875F", 9)}
-    {dither("brace", "#D97757", "#EBA98F", 3)}
+    {dither("brace", "#D97757", "#EBA98F", 6)}
   </defs>
   <rect width="{W}" height="{H}" fill="{BG}"/>
   {sparks}
