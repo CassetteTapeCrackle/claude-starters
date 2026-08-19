@@ -5,7 +5,7 @@
     {
       "name": "claude-starters",
       "source": "./",
-      "description": "Token-lean starters + on-demand clean-code skills + a scoped 74-agent library + cost-aware auto-launch orchestration."
+      "description": "Token-lean starters + on-demand clean-code skills + a scoped 76-agent library + cost-aware auto-launch orchestration."
     }
   ]
 }

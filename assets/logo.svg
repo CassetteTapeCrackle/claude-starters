@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="claude-starters logo: a sprout growing between code brackets">
+  <title>claude-starters</title>
+  <g fill="none" stroke="#D97757" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M36 24 H24 V104 H36"/>
+    <path d="M92 24 H104 V104 H92"/>
+  </g>
+  <path d="M64 106 V60" fill="none" stroke="#4F9A61" stroke-width="8" stroke-linecap="round"/>
+  <path d="M63 82 C53 82 42 74 40 59 C53 59 62 67 63 82 Z" fill="#4F9A61"/>
+  <path d="M65 68 C74 68 85 60 87 45 C75 45 66 54 65 68 Z" fill="#6FBF7F"/>
+</svg>
