@@ -10,6 +10,9 @@ trap 'exit 0' ERR   # fail-safe: a hook must never wedge the session
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 dir="$PWD"
 
+# Opt-out via plugin userConfig; unset/empty means enabled.
+case "${CLAUDE_PLUGIN_OPTION_TURN_END_ORCHESTRATOR:-}" in false|0|off) exit 0 ;; esac
+
 [ -f "$dir/.claude/.starter-applied" ] || exit 0
 
 cands="$(bash "$SCRIPT_DIR/detect-candidates.sh" "$dir" 2>/dev/null || true)"

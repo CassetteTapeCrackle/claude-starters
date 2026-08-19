@@ -1,0 +1,42 @@
+name: Bug report
+description: Something misbehaved — a starter, an agent, a hook, or the applier.
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What did you run, and what did it do instead of what you expected?
+      placeholder: |
+        /apply-starter rust --framework axum
+        …
+    validations: { required: true }
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: Output of `apply-starter --version`.
+    validations: { required: true }
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Applier (/apply-starter)
+        - A specific starter
+        - Agents / agent library
+        - Orchestration hooks
+        - Plugin install / marketplace
+        - Not sure
+    validations: { required: true }
+  - type: textarea
+    id: dryrun
+    attributes:
+      label: Dry-run output
+      description: If it's about applying a starter, paste `apply-starter <stack> --dry-run`. Skip if not relevant.
+      render: text
+  - type: input
+    id: os
+    attributes:
+      label: OS and shell
+      placeholder: macOS 15.5, zsh

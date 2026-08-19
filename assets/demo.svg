@@ -1,82 +1,91 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 320" width="780" height="320" role="img"
-     aria-label="Terminal demo: /apply-starter rust --framework axum writes a CLAUDE.md and activates 14 agents, then git status --short shows nothing, because every file it wrote is git-ignored.">
-  <title>claude-starters demo — apply a starter, leave zero repo footprint</title>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 412" width="900" height="412" role="img"
+     aria-label="Terminal demo. Running /apply-starter rust --framework axum prints 'Applied rust starter (framework: axum) to .' It writes a CLAUDE.md with the framework pinned to axum, activates 14 stack-specific agents out of a 76-agent library, and arms the clean-code-rust depth skill which stays idle until you touch Rust code. Running git status --short then prints nothing, because the generated files are listed in .git/info/exclude rather than .gitignore, so they are never committed and teammates never see them.">
+  <title>claude-starters — one command per stack, zero repo footprint</title>
   <defs>
     <style>
       .win  { fill:#12161d; stroke:#2a3038; stroke-width:1 }
       .bar  { fill:#1a1f27 }
       .ttl  { fill:#6b7684; font:400 12px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace }
       .mono { font:400 15px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; white-space:pre }
+      .ann  { font:400 13.5px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace }
       .ps1  { fill:#4F9A61 }
       .cmd  { fill:#e6edf3 }
       .out  { fill:#a9b4c0 }
-      .num  { fill:#D97757 }
-      .rem  { fill:#5a6472; font-style:italic }
+      .key  { fill:#D97757 }
+      .des  { fill:#7d8794 }
+      .rule { fill:#D97757; opacity:.35 }
       .cur  { fill:#D97757 }
 
-      @keyframes t1  {0%,1.3%{width:0}   13.3%,92%{width:324px} 97%,100%{width:324px}}
-      @keyframes c1  {0%,1.2%{opacity:0} 1.3%,13.3%{opacity:1}  13.4%,100%{opacity:0}}
-      @keyframes x1  {0%,1.3%{x:42px}    13.3%,92%{x:366px}     97%,100%{x:366px}}
-      @keyframes t2  {0%,19.3%{width:0}  27.7%,92%{width:225px} 97%,100%{width:225px}}
-      @keyframes c2  {0%,19.2%{opacity:0}19.3%,27.7%{opacity:1} 27.8%,100%{opacity:0}}
-      @keyframes x2  {0%,19.3%{x:42px}   27.7%,92%{x:267px}     97%,100%{x:267px}}
-      @keyframes t3  {0%,33.3%{width:0}  39.3%,92%{width:162px} 97%,100%{width:162px}}
-      @keyframes c3  {0%,33.2%{opacity:0}33.3%,39.3%{opacity:1} 39.4%,100%{opacity:0}}
-      @keyframes x3  {0%,33.3%{x:42px}   39.3%,92%{x:204px}     97%,100%{x:204px}}
+      @keyframes t1 {0%,1.7%{width:0}   11.7%,92%{width:324px} 97%,100%{width:324px}}
+      @keyframes x1 {0%,1.7%{x:42px}    11.7%,92%{x:366px}     97%,100%{x:366px}}
+      @keyframes c1 {0%,1.6%{opacity:0} 1.7%,11.7%{opacity:1}  11.8%,100%{opacity:0}}
+      @keyframes t2 {0%,25.6%{width:0}  30.6%,92%{width:162px} 97%,100%{width:162px}}
+      @keyframes x2 {0%,25.6%{x:42px}   30.6%,92%{x:204px}     97%,100%{x:204px}}
+      @keyframes c2 {0%,25.5%{opacity:0}25.6%,30.6%{opacity:1} 30.7%,100%{opacity:0}}
 
-      @keyframes r1  {0%,1.2%{opacity:0}  1.3%,92%{opacity:1} 97%,100%{opacity:0}}
-      @keyframes r2  {0%,15.3%{opacity:0}15.4%,92%{opacity:1} 97%,100%{opacity:0}}
-      @keyframes r3  {0%,19.2%{opacity:0}19.3%,92%{opacity:1} 97%,100%{opacity:0}}
-      @keyframes r4  {0%,29.3%{opacity:0}29.4%,92%{opacity:1} 97%,100%{opacity:0}}
-      @keyframes r5  {0%,33.2%{opacity:0}33.3%,92%{opacity:1} 97%,100%{opacity:0}}
-      @keyframes r6  {0%,42.0%{opacity:0}42.1%,92%{opacity:1} 97%,100%{opacity:0}}
-      @keyframes r7  {0%,44.7%{opacity:0}44.8%,92%{opacity:1} 97%,100%{opacity:0}}
-      @keyframes r8  {0%,48.0%{opacity:0}48.1%,92%{opacity:1} 97%,100%{opacity:0}}
-      @keyframes blink {0%,49%{opacity:1} 50%,100%{opacity:0}}
+      @keyframes r1{0%,1.6%{opacity:0} 1.7%,92%{opacity:1} 97%,100%{opacity:0}}
+      @keyframes r2{0%,13.2%{opacity:0}13.3%,92%{opacity:1}97%,100%{opacity:0}}
+      @keyframes r3{0%,16.0%{opacity:0}16.1%,92%{opacity:1}97%,100%{opacity:0}}
+      @keyframes r4{0%,18.2%{opacity:0}18.3%,92%{opacity:1}97%,100%{opacity:0}}
+      @keyframes r5{0%,20.5%{opacity:0}20.6%,92%{opacity:1}97%,100%{opacity:0}}
+      @keyframes r6{0%,25.5%{opacity:0}25.6%,92%{opacity:1}97%,100%{opacity:0}}
+      @keyframes r7{0%,33.2%{opacity:0}33.3%,92%{opacity:1}97%,100%{opacity:0}}
+      @keyframes r8{0%,35.5%{opacity:0}35.6%,92%{opacity:1}97%,100%{opacity:0}}
+      @keyframes r9{0%,38.8%{opacity:0}38.9%,92%{opacity:1}97%,100%{opacity:0}}
+      @keyframes blink{0%,49%{opacity:1} 50%,100%{opacity:0}}
 
-      #clip1 rect { animation:t1 15s steps(36,end) infinite }
-      #clip2 rect { animation:t2 15s steps(25,end) infinite }
-      #clip3 rect { animation:t3 15s steps(18,end) infinite }
-      .cur1 { animation:x1 15s steps(36,end) infinite, c1 15s linear infinite }
-      .cur2 { animation:x2 15s steps(25,end) infinite, c2 15s linear infinite }
-      .cur3 { animation:x3 15s steps(18,end) infinite, c3 15s linear infinite }
-      .a1{animation:r1 15s linear infinite} .a2{animation:r2 15s linear infinite}
-      .a3{animation:r3 15s linear infinite} .a4{animation:r4 15s linear infinite}
-      .a5{animation:r5 15s linear infinite} .a6{animation:r6 15s linear infinite}
-      .a7{animation:r7 15s linear infinite} .a8{animation:r8 15s linear infinite}
-      .blinker{animation:blink 1.06s steps(1,end) infinite}
+      #clip1 rect{animation:t1 18s steps(36,end) infinite}
+      #clip2 rect{animation:t2 18s steps(18,end) infinite}
+      .cur1{animation:x1 18s steps(36,end) infinite, c1 18s linear infinite}
+      .cur2{animation:x2 18s steps(18,end) infinite, c2 18s linear infinite}
+      .a1{animation:r1 18s linear infinite} .a2{animation:r2 18s linear infinite}
+      .a3{animation:r3 18s linear infinite} .a4{animation:r4 18s linear infinite}
+      .a5{animation:r5 18s linear infinite} .a6{animation:r6 18s linear infinite}
+      .a7{animation:r7 18s linear infinite} .a8{animation:r8 18s linear infinite}
+      .a9{animation:r9 18s linear infinite} .blinker{animation:blink 1.06s steps(1,end) infinite}
     </style>
     <clipPath id="clip1"><rect x="42" y="58" width="324" height="24"/></clipPath>
-    <clipPath id="clip2"><rect x="42" y="120" width="225" height="24"/></clipPath>
-    <clipPath id="clip3"><rect x="42" y="182" width="162" height="24"/></clipPath>
+    <clipPath id="clip2"><rect x="42" y="236" width="162" height="24"/></clipPath>
   </defs>
 
-  <rect class="win" x="0.5" y="0.5" width="779" height="319" rx="12"/>
-  <path class="bar" d="M0.5 12.5a12 12 0 0 1 12-12h755a12 12 0 0 1 12 12V36H0.5Z"/>
+  <rect class="win" x="0.5" y="0.5" width="899" height="411" rx="12"/>
+  <path class="bar" d="M0.5 12.5a12 12 0 0 1 12-12h875a12 12 0 0 1 12 12V36H0.5Z"/>
   <circle cx="24" cy="18" r="5.5" fill="#ff5f57"/>
   <circle cx="44" cy="18" r="5.5" fill="#febc2e"/>
   <circle cx="64" cy="18" r="5.5" fill="#28c840"/>
-  <text class="ttl" x="390" y="22" text-anchor="middle">~/my-rust-service</text>
+  <text class="ttl" x="450" y="22" text-anchor="middle">~/my-rust-service</text>
 
   <g class="mono">
     <text class="ps1 a1" x="24" y="76">&#10095;</text>
     <g clip-path="url(#clip1)"><text class="cmd" x="42" y="76" textLength="324" lengthAdjust="spacing">/apply-starter rust --framework axum</text></g>
     <rect class="cur cur1" x="42" y="62" width="9" height="18" opacity="0"/>
     <text class="out a2" x="42" y="102">Applied rust starter (framework: axum) to .</text>
+  </g>
 
-    <text class="ps1 a3" x="24" y="138">&#10095;</text>
-    <g clip-path="url(#clip2)"><text class="cmd" x="42" y="138" textLength="225" lengthAdjust="spacing">ls .claude/agents | wc -l</text></g>
-    <rect class="cur cur2" x="42" y="124" width="9" height="18" opacity="0"/>
-    <text class="num a4" x="42" y="164">14</text>
+  <rect class="rule a3" x="44" y="118" width="3" height="86" rx="1.5"/>
+  <g class="ann">
+    <text class="key a3" x="64" y="136">CLAUDE.md</text>
+    <text class="des a3" x="210" y="136">tailored to rust &#8212; framework pinned to axum</text>
+    <text class="key a4" x="64" y="164">.claude/agents/</text>
+    <text class="des a4" x="210" y="164">14 rust experts on call, not all 76</text>
+    <text class="key a5" x="64" y="192">clean-code-rust</text>
+    <text class="des a5" x="210" y="192">lean &#8212; stays idle until you touch .rs</text>
+  </g>
 
-    <text class="ps1 a5" x="24" y="200">&#10095;</text>
-    <g clip-path="url(#clip3)"><text class="cmd" x="42" y="200" textLength="162" lengthAdjust="spacing">git status --short</text></g>
-    <rect class="cur cur3" x="42" y="186" width="9" height="18" opacity="0"/>
+  <g class="mono">
+    <text class="ps1 a6" x="24" y="254">&#10095;</text>
+    <g clip-path="url(#clip2)"><text class="cmd" x="42" y="254" textLength="162" lengthAdjust="spacing">git status --short</text></g>
+    <rect class="cur cur2" x="42" y="240" width="9" height="18" opacity="0"/>
+  </g>
 
-    <text class="rem a6" x="42" y="228">nothing. CLAUDE.md + 14 agents are all git-ignored —</text>
-    <text class="rem a7" x="42" y="252">your repo is byte-for-byte what it was before.</text>
+  <rect class="rule a7" x="44" y="272" width="3" height="58" rx="1.5"/>
+  <g class="ann">
+    <text class="des a7" x="64" y="290">no output. the generated files are listed in <tspan class="key">.git/info/exclude</tspan>,</text>
+    <text class="des a8" x="64" y="318">never in <tspan class="key">.gitignore</tspan> &#8212; nothing to commit, teammates see nothing.</text>
+  </g>
 
-    <text class="ps1 a8" x="24" y="288">&#10095;</text>
-    <g class="a8"><rect class="cur blinker" x="42" y="274" width="9" height="18"/></g>
+  <g class="mono">
+    <text class="ps1 a9" x="24" y="368">&#10095;</text>
+    <g class="a9"><rect class="cur blinker" x="42" y="354" width="9" height="18"/></g>
   </g>
 </svg>

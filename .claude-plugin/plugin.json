@@ -1,8 +1,11 @@
 {
   "name": "claude-starters",
+  "displayName": "Claude Starters",
   "version": "1.1.1",
   "description": "Token-lean project starters, on-demand clean-code skills, a scoped 76-agent library, and a cost-aware auto-launch orchestrator for Claude Code.",
-  "author": { "name": "Matt" },
+  "author": {
+    "name": "Matt"
+  },
   "homepage": "https://github.com/CassetteTapeCrackle/claude-starters",
   "license": "MIT",
   "keywords": [
@@ -13,5 +16,17 @@
     "audio",
     "juce",
     "workflow"
-  ]
+  ],
+  "userConfig": {
+    "suggest_on_existing_repos": {
+      "type": "boolean",
+      "title": "Offer a starter in existing repos",
+      "description": "On session start, if the repo has a recognizable stack and no starter applied, offer to apply one. Asked once per repo, never writes to the repo. Leave unset for on."
+    },
+    "turn_end_orchestrator": {
+      "type": "boolean",
+      "title": "Surface specialist agents at turn end",
+      "description": "After each turn, scan the working-tree diff for risk patterns tied to your stack and surface matching specialist agents. Deterministic, no model call. Leave unset for on."
+    }
+  }
 }

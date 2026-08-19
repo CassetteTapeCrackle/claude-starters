@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" width="1280" height="640" shape-rendering="crispEdges">
+  <defs>
+    <pattern id="d35" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="#143A22"/><rect x="0" y="0" width="2" height="2" fill="#8FE0A6"/><rect x="4" y="0" width="2" height="2" fill="#8FE0A6"/><rect x="2" y="2" width="2" height="2" fill="#8FE0A6"/><rect x="0" y="4" width="2" height="2" fill="#8FE0A6"/><rect x="4" y="4" width="2" height="2" fill="#8FE0A6"/><rect x="6" y="6" width="2" height="2" fill="#8FE0A6"/></pattern>
+    <pattern id="d50" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="#143A22"/><rect x="0" y="0" width="2" height="2" fill="#A8ECBB"/><rect x="4" y="0" width="2" height="2" fill="#A8ECBB"/><rect x="2" y="2" width="2" height="2" fill="#A8ECBB"/><rect x="6" y="2" width="2" height="2" fill="#A8ECBB"/><rect x="0" y="4" width="2" height="2" fill="#A8ECBB"/><rect x="4" y="4" width="2" height="2" fill="#A8ECBB"/><rect x="2" y="6" width="2" height="2" fill="#A8ECBB"/><rect x="6" y="6" width="2" height="2" fill="#A8ECBB"/></pattern>
+    <pattern id="d65" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="#143A22"/><rect x="0" y="0" width="2" height="2" fill="#C6F5D2"/><rect x="2" y="0" width="2" height="2" fill="#C6F5D2"/><rect x="4" y="0" width="2" height="2" fill="#C6F5D2"/><rect x="6" y="0" width="2" height="2" fill="#C6F5D2"/><rect x="2" y="2" width="2" height="2" fill="#C6F5D2"/><rect x="6" y="2" width="2" height="2" fill="#C6F5D2"/><rect x="0" y="4" width="2" height="2" fill="#C6F5D2"/><rect x="4" y="4" width="2" height="2" fill="#C6F5D2"/><rect x="6" y="4" width="2" height="2" fill="#C6F5D2"/><rect x="2" y="6" width="2" height="2" fill="#C6F5D2"/><rect x="6" y="6" width="2" height="2" fill="#C6F5D2"/></pattern>
+  </defs>
+  <rect width="1280" height="640" fill="#22211F"/>
+  <text x="148" y="250" font-family="Menlo, monospace" font-size="20" fill="#8A8681" opacity="0.75">*</text><text x="455" y="214" font-family="Menlo, monospace" font-size="20" fill="#8A8681" opacity="0.75">*</text><text x="120" y="452" font-family="Menlo, monospace" font-size="20" fill="#8A8681" opacity="0.75">*</text><text x="492" y="392" font-family="Menlo, monospace" font-size="20" fill="#8A8681" opacity="0.75">*</text><text x="300" y="138" font-family="Menlo, monospace" font-size="20" fill="#8A8681" opacity="0.75">*</text><text x="505" y="560" font-family="Menlo, monospace" font-size="20" fill="#8A8681" opacity="0.75">*</text><text x="92" y="336" font-family="Menlo, monospace" font-size="20" fill="#8A8681" opacity="0.75">*</text><text x="398" y="592" font-family="Menlo, monospace" font-size="20" fill="#8A8681" opacity="0.75">*</text><text x="250" y="108" font-family="Menlo, monospace" font-size="20" fill="#8A8681" opacity="0.75">*</text><text x="46" y="168" font-family="Menlo, monospace" font-size="20" fill="#8A8681" opacity="0.75">*</text><text x="523" y="300" font-family="Menlo, monospace" font-size="20" fill="#8A8681" opacity="0.75">*</text>
+  <rect x="78" y="176" width="24" height="254" fill="#D97757"/>
+  <rect x="104" y="176" width="50" height="14" fill="#D97757"/>
+  <rect x="104" y="416" width="50" height="14" fill="#D97757"/>
+  <rect x="416" y="176" width="24" height="254" fill="#D97757"/>
+  <rect x="364" y="176" width="50" height="14" fill="#D97757"/>
+  <rect x="364" y="416" width="50" height="14" fill="#D97757"/>
+  <rect x="234" y="288" width="24" height="126" fill="#3F8F58"/>
+  <rect x="286" y="224" width="50" height="14" fill="url(#d35)"/>
+  <rect x="260" y="240" width="102" height="14" fill="url(#d50)"/>
+  <rect x="260" y="256" width="128" height="14" fill="url(#d50)"/>
+  <rect x="260" y="272" width="102" height="14" fill="url(#d65)"/>
+  <rect x="260" y="288" width="50" height="14" fill="url(#d65)"/>
+  <rect x="182" y="304" width="50" height="14" fill="url(#d35)"/>
+  <rect x="130" y="320" width="102" height="14" fill="url(#d50)"/>
+  <rect x="104" y="336" width="128" height="14" fill="url(#d50)"/>
+  <rect x="130" y="352" width="102" height="14" fill="url(#d65)"/>
+  <rect x="182" y="368" width="50" height="14" fill="url(#d65)"/>
+  <g font-family="Menlo, ui-monospace, monospace">
+    <text x="560" y="196" font-size="44" font-weight="700" fill="#D97757">claude-starters</text>
+    <rect x="560" y="216" width="655" height="2" fill="#4A4744"/>
+    <g font-size="23">
+      <text x="560" y="278" fill="#D97757">&#10095;</text>
+      <text x="592" y="278" fill="#E8E6E1">/apply-starter rust --framework axum</text>
+      <text x="592" y="320" fill="#8A8681">tailored &#8212; CLAUDE.md for rust, axum pinned</text>
+      <text x="592" y="356" fill="#8A8681">experts  &#8212; 14 rust specialists, not all 76</text>
+      <text x="592" y="392" fill="#8A8681">lean     &#8212; skills idle until you touch .rs</text>
+      <text x="560" y="458" fill="#D97757">&#10095;</text>
+      <text x="592" y="458" fill="#E8E6E1">git status --short</text>
+      <text x="592" y="500" fill="#8A8681">clean &#8212; <tspan fill="#D97757">zero</tspan> files added to your repo</text>
+    </g>
+    <rect x="560" y="536" width="655" height="2" fill="#4A4744"/>
+  </g>
+</svg>
