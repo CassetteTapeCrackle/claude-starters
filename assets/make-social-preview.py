@@ -1,8 +1,12 @@
 #!/usr/bin/env python3
-"""Regenerate assets/social-preview.svg — Claude Code welcome-screen aesthetic.
+"""Regenerate assets/social-preview.svg.
 
-Wide slabs with a Bayer-dithered fill on a dark terminal ground, solid clay
-accents, scattered * sparkles, terminal-style copy.
+Claude Code welcome-screen idiom: wide horizontal slabs with a Bayer-dithered
+fill, solid clay accents, scattered * sparkles, terminal-style copy, on cream.
+
+The mark is a sprout inside code brackets. Depth comes from dither density —
+d25 reads as furthest back, d75 as nearest front — so overlapping leaves
+separate without outlines.
 
     python3 assets/make-social-preview.py && \
       rsvg-convert assets/social-preview.svg -w 1280 -h 640 -o assets/social-preview.png
@@ -11,68 +15,81 @@ import pathlib
 
 W, H = 1280, 640
 BG, CLAY, INK, MUTED, RULE = "#F0EEE6", "#C9603C", "#1F1E1D", "#6B6862", "#CFC9BE"
-STEM_G = "#3F8F58"
-BRACKET = "#D97757"
+BRACKET, STEM_G, SOIL = "#D97757", "#2E7044", "#B8875F"
 SPARK_C = "#B9B2A6"
 
 # ---- mark geometry -------------------------------------------------------
-# 14 cols x 16 rows. Bracket spines at col 0 / col 13, arms at cols 1-2 / 11-12
-# (rows 0 and 15 only). The plant must stay inside cols 2..11 so it never
-# touches the frame.
-UW, UH, GAP = 24, 17, 2
-COLS, ROWS = 14, 16
-X0 = 96
-Y0 = (H - ROWS * UH) // 2                     # vertically centred
+UW, UH, GAP = 12, 8, 1          # fine grid: still wide slabs, ~2.5x more detail
+COLS, ROWS = 28, 34
+X0 = 92
+Y0 = (H - ROWS * UH) // 2
 
-# Both leaves fan from the upper stem; the stem then descends. Keeps the mark
-# centred in the frame instead of reading as a diagonal staircase.
-LEAF_R = [(3, 9, 10, "d35"), (4, 8, 11, "d50"), (5, 7, 10, "d65"), (6, 7, 8, "d65")]
-LEAF_L = [(5, 3, 4, "d35"), (6, 2, 5, "d50"), (7, 3, 5, "d65"), (8, 4, 5, "d65")]
+SPINE_L, SPINE_R = (0, 1), (26, 27)
+ARM_L, ARM_R = (2, 6), (21, 25)
+ARM_ROWS = ((0, 2), (32, 2))     # (start_row, thickness)
 
-# ---- copy geometry -------------------------------------------------------
-TX, CX = 560, 596                              # prompt column, content column
-Y_TITLE, Y_RULE1 = 172, 194
-Y_CMD1, Y_A1, Y_A2, Y_A3 = 256, 296, 330, 364
-Y_CMD2, Y_A4 = 426, 466
-Y_RULE2 = 506
-RULE_W = 620
+# (row, col_start, col_end, density) — density carries depth: d25 sits back,
+# d75 comes forward, so overlapping leaves separate without outlines.
+# Two opposite leaf pairs plus a terminal bud: reads as a sprout, not a conifer.
+BUD     = [(3, 13, 14, "d50"), (4, 12, 15, "d75"), (5, 12, 15, "d75")]
 
-# sparkles: clear of the mark (x 90-440, y Y0..Y0+272) and the copy block
-SPARK = [(60, 112), (252, 118), (470, 176), (500, 306), (44, 300),
-         (474, 512), (196, 588), (640, 590), (996, 604), (1168, 96), (312, 604)]
+UPPER_R = [(6, 19, 22, "d25"), (7, 17, 22, "d50"), (8, 15, 21, "d75"), (9, 15, 18, "d50")]
+UPPER_L = [(8, 5, 8, "d25"), (9, 5, 10, "d50"), (10, 6, 12, "d75"), (11, 9, 12, "d50")]
 
-DSC = 2                                        # dither sub-cell px; raise = coarser
+LOWER_R = [(15, 17, 21, "d25"), (16, 15, 22, "d50"), (17, 15, 20, "d50"), (18, 15, 17, "d25")]
+LOWER_L = [(17, 6, 11, "d25"), (18, 4, 12, "d50"), (19, 6, 12, "d50"), (20, 9, 12, "d25")]
 
-def dither(name, dark, light, on):
-    order = [0,8,2,10, 12,4,14,6, 3,11,1,9, 15,7,13,5]   # Bayer 4x4
+LEAVES = BUD + UPPER_R + UPPER_L + LOWER_R + LOWER_L
+
+STEM = [(5, 13, 13, 12),                       # (row, c0, c1, rows) solid
+        (17, 13, 14, 12)]                      # tapers wider toward the soil
+SOIL_ROWS = [(29, 10, 17), (30, 8, 19), (31, 6, 21)]
+
+# ---- copy ----------------------------------------------------------------
+TX, CX, DX = 560, 596, 716
+Y_TITLE, Y_RULE1 = 170, 192
+Y_CMD = 250
+Y_R1, Y_R2, Y_R3 = 302, 340, 378
+Y_RULE2 = 420
+Y_F1, Y_F2 = 458, 494
+RULE_W = 624
+
+SPARK = [(62, 112), (250, 104), (470, 168), (498, 300), (46, 300),
+         (472, 508), (196, 586), (648, 588), (1000, 602), (1170, 96), (316, 602)]
+
+DSC = 2
+
+def dither(name, light_bg, dot, on):
+    order = [0,8,2,10, 12,4,14,6, 3,11,1,9, 15,7,13,5]     # Bayer 4x4
     n = 4 * DSC
     cells = "".join(
-        f'<rect x="{(i%4)*DSC}" y="{(i//4)*DSC}" width="{DSC}" height="{DSC}" fill="{light}"/>'
+        f'<rect x="{(i%4)*DSC}" y="{(i//4)*DSC}" width="{DSC}" height="{DSC}" fill="{dot}"/>'
         for i, t in enumerate(order) if t < on)
     return (f'<pattern id="{name}" width="{n}" height="{n}" patternUnits="userSpaceOnUse">'
-            f'<rect width="{n}" height="{n}" fill="{dark}"/>{cells}</pattern>')
-
-FILL = {"d35": "url(#d35)", "d50": "url(#d50)", "d65": "url(#d65)"}
+            f'<rect width="{n}" height="{n}" fill="{light_bg}"/>{cells}</pattern>')
 
 def block(row, c0, c1, rows, fill):
     return (f'<rect x="{X0 + c0*UW}" y="{Y0 + row*UH}" '
             f'width="{(c1-c0+1)*UW - GAP}" height="{rows*UH - GAP}" fill="{fill}"/>')
 
 body = [
-    block(0, 0, 0, ROWS, BRACKET),     # left spine, one solid piece
-    block(0, 1, 2, 1, BRACKET),
-    block(15, 1, 2, 1, BRACKET),
-    block(0, 13, 13, ROWS, BRACKET),   # right spine
-    block(0, 11, 12, 1, BRACKET),
-    block(15, 11, 12, 1, BRACKET),
-    block(6, 6, 6, 9, STEM_G),         # stem, centred on the grid
+    block(0, *SPINE_L, ROWS, BRACKET),
+    block(0, *SPINE_R, ROWS, BRACKET),
 ]
-for row, c0, c1, st in LEAF_R + LEAF_L:
-    body.append(block(row, c0, c1, 1, FILL[st]))
+for r0, th in ARM_ROWS:
+    body.append(block(r0, *ARM_L, th, BRACKET))
+    body.append(block(r0, *ARM_R, th, BRACKET))
 
-# guard: nothing green may stray onto the frame columns
-for row, c0, c1, _ in LEAF_R + LEAF_L:
-    assert 2 <= c0 <= c1 <= 11, f"leaf row {row} escapes the frame: {c0}..{c1}"
+for row, c0, c1, rows in STEM:
+    body.append(block(row, c0, c1, rows, STEM_G))
+for row, c0, c1, dens in LEAVES:
+    body.append(block(row, c0, c1, 1, f"url(#{dens})"))
+for row, c0, c1 in SOIL_ROWS:
+    body.append(block(row, c0, c1, 1, "url(#soil)"))
+
+# guard: nothing may stray onto the bracket spines
+for row, c0, c1, *_ in LEAVES:
+    assert 2 <= c0 <= c1 <= 25, f"leaf row {row} hits the frame: {c0}..{c1}"
 
 sparks = "".join(
     f'<text x="{x}" y="{y}" font-family="Menlo, monospace" font-size="19" '
@@ -81,9 +98,10 @@ sparks = "".join(
 MONO = "Menlo, ui-monospace, monospace"
 svg = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" shape-rendering="crispEdges">
   <defs>
-    {dither("d35", "#E4F0E4", "#4E9A64", 6)}
-    {dither("d50", "#E4F0E4", "#3C8552", 8)}
-    {dither("d65", "#E4F0E4", "#2E7044", 11)}
+    {dither("d25", "#E8F1E7", "#5CA574", 4)}
+    {dither("d50", "#E8F1E7", "#3C8552", 8)}
+    {dither("d75", "#E8F1E7", "#2A6740", 12)}
+    {dither("soil", "#EDE3D8", "#B8875F", 9)}
   </defs>
   <rect width="{W}" height="{H}" fill="{BG}"/>
   {sparks}
@@ -92,17 +110,21 @@ svg = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{
     <text x="{TX}" y="{Y_TITLE}" font-size="42" font-weight="700" fill="{CLAY}">claude-starters</text>
     <rect x="{TX}" y="{Y_RULE1}" width="{RULE_W}" height="2" fill="{RULE}"/>
     <g font-size="23">
-      <text x="{TX}" y="{Y_CMD1}" fill="{CLAY}">&#10095;</text>
-      <text x="{CX}" y="{Y_CMD1}" fill="{INK}">/apply-starter rust --framework axum</text>
-      <text x="{CX}" y="{Y_A1}" fill="{MUTED}">tailored &#8212; CLAUDE.md for rust, axum pinned</text>
-      <text x="{CX}" y="{Y_A2}" fill="{MUTED}">experts  &#8212; 14 rust specialists, not all 76</text>
-      <text x="{CX}" y="{Y_A3}" fill="{MUTED}">lean     &#8212; skills idle until you touch .rs</text>
-      <text x="{TX}" y="{Y_CMD2}" fill="{CLAY}">&#10095;</text>
-      <text x="{CX}" y="{Y_CMD2}" fill="{INK}">git status --short</text>
-      <text x="{CX}" y="{Y_A4}" fill="{MUTED}">clean &#8212; <tspan fill="{CLAY}">zero</tspan> files added to your repo</text>
+      <text x="{TX}" y="{Y_CMD}" fill="{CLAY}">&#10095;</text>
+      <text x="{CX}" y="{Y_CMD}" fill="{INK}">/apply-starter &lt;your stack&gt;</text>
+      <text x="{CX}" y="{Y_R1}" fill="{CLAY}">tailored</text>
+      <text x="{DX}" y="{Y_R1}" fill="{INK}">rules written for your project</text>
+      <text x="{CX}" y="{Y_R2}" fill="{CLAY}">experts</text>
+      <text x="{DX}" y="{Y_R2}" fill="{INK}">language specialists, per stack</text>
+      <text x="{CX}" y="{Y_R3}" fill="{CLAY}">lean</text>
+      <text x="{DX}" y="{Y_R3}" fill="{INK}">loads only what the task needs</text>
     </g>
     <rect x="{TX}" y="{Y_RULE2}" width="{RULE_W}" height="2" fill="{RULE}"/>
+    <g font-size="21" fill="{MUTED}">
+      <text x="{TX}" y="{Y_F1}">23 starters &#183; 76 agents &#183; 9 depth skills</text>
+      <text x="{TX}" y="{Y_F2}">nothing committed &#8212; zero files added to your repo</text>
+    </g>
   </g>
 </svg>'''
 pathlib.Path(__file__).with_name("social-preview.svg").write_text(svg)
-print(f"mark: {COLS*UW}x{ROWS*UH} at ({X0},{Y0})  |  {len(body)} shapes")
+print(f"mark {COLS*UW}x{ROWS*UH} at ({X0},{Y0}) | {len(body)} shapes, {len(LEAVES)} leaf slabs")
