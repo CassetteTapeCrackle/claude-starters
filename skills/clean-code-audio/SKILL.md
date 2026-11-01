@@ -21,6 +21,8 @@ Apply on top of the audio-plugin base rules (RT-audio non-negotiables, DSP-is-sa
 
 ## Testability & sacredness
 - Keep DSP as pure functions/classes over buffers in `Source/dsp/`, decoupled from JUCE UI, so it's unit-testable with signal fixtures and **golden buffers** (impulse, sine sweep).
+- `processBlock` stays a thin dispatcher: read the smoothed parameters, then call DSP functions that take the buffer and their state as arguments.
+- Randomness (noise, dither, humanize) comes from a preallocated RNG the caller passes in and seeds. Tests use a fixed seed, so golden buffers stay reproducible.
 - DSP is sacred: a golden-buffer test failing on a non-DSP change means something leaked into the algorithm — stop and fix the boundary, don't update the golden file.
 
 ## Signals it's going wrong

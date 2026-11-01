@@ -16,6 +16,8 @@ test_cpp_skill() {
   assert_contains "$c" "unique_ptr" "ownership model"
   assert_contains "$c" "noexcept" "noexcept discipline"
   assert_contains "$c" "string_view" "non-owning views"
+  assert_contains "$c" "lower_bound" "algorithms over raw loops"
+  assert_contains "$c" "receipt" "call-order rules as parameters"
 }
 
 test_audio_skill() {
@@ -28,6 +30,8 @@ test_audio_skill() {
   assert_contains "$c" "denormal" "denormals"
   assert_contains "$c" "atomic" "thread model"
   assert_contains "$c" "block" "block processing"
+  assert_contains "$c" "thin dispatcher" "processBlock stays thin"
+  assert_contains "$c" "fixed seed" "seeded RNG for golden buffers"
 }
 
 run_tests
