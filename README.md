@@ -160,7 +160,7 @@ path costs you nothing.
 ## Skills
 Depth skills that auto-fire on relevant code and cost ~nothing at rest:
 
-clean-code-cpp · clean-code-audio · clean-code-rust · clean-code-go ·
+clean-code-core · clean-code-cpp · clean-code-audio · clean-code-rust · clean-code-go ·
 clean-code-python · clean-code-bash · clean-code-c · clean-code-ts
 
 ## Agents

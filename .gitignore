@@ -11,3 +11,4 @@
 # Local Claude Code / worktrees
 .claude/settings.local.json
 .worktrees/
+.claude/worktrees/

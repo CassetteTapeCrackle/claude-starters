@@ -18,6 +18,8 @@ On top of the base rules (edition 2021, clippy -D warnings, rustfmt, cargo test)
 
 ## Style
 - Iterators/adapters over manual index loops; `?` over match-on-error pyramids.
+- Producing many values: return `impl Iterator<Item = T>` and let the caller decide whether to `collect()`.
+- A validated newtype has a constructor returning `Result` (`Normalized::new(v)?`), so holding one proves the check ran.
 - Derive (`Debug`, `Clone`, `PartialEq`) rather than hand-writing. `impl Trait` in args for flexibility.
 - `clippy::pedantic` is a good aspiration; silence lints with a reason, never blanket-allow.
 

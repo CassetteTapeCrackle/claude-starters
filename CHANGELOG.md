@@ -5,6 +5,19 @@ signal Claude Code uses to offer an update (`/plugin marketplace update
 claude-starters` → `/plugin update claude-starters`).
 
 ## Unreleased
+- **`clean-code-core` ships with the plugin.** The language-agnostic base the
+  `clean-code-<lang>` skills build on was only in a local config; now it is in
+  `skills/`. It gains function-design rules: one level of abstraction per
+  body, honest signatures (I/O, clocks and randomness passed in from the top),
+  asking for the least you need, thin framework callbacks, `<values>_by_<key>`
+  map names, and a Types section (types that can only be built valid).
+- **`clean-code-cpp`:** standard algorithms over raw loops, callbacks or ranges
+  over huge result vectors, invariant wrapper types, and locks passed as
+  receipts for call-order rules.
+- **`clean-code-audio`:** `processBlock` as a thin dispatcher; seeded RNGs so
+  golden buffers stay reproducible.
+- **`clean-code-rust`:** return iterators instead of collecting; validated
+  newtypes.
 - **`web-ts` and `node-api` move to Vite+.** One `vite.config.ts` replaces the
   ESLint + Prettier setup: `vp check` runs format, lint and type checks
   together, `vp test` runs Vitest, and the scaffolded pre-commit hook runs
