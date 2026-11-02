@@ -4,7 +4,7 @@ Bump `version` in `.claude-plugin/plugin.json` on every release — that's the
 signal Claude Code uses to offer an update (`/plugin marketplace update
 claude-starters` → `/plugin update claude-starters`).
 
-## Unreleased
+## 1.3.0
 - **`clean-code-core` ships with the plugin.** The language-agnostic base the
   `clean-code-<lang>` skills build on was only in a local config; now it is in
   `skills/`. It gains function-design rules: one level of abstraction per
