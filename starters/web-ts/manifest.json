@@ -5,10 +5,11 @@
   "package_manager": "pnpm",
   "skill": "clean-code-ts",
   "commands": {
-    "dev": "pnpm dev",
-    "build": "pnpm build",
-    "test": "pnpm test",
-    "lint": "pnpm lint",
-    "typecheck": "pnpm tsc --noEmit"
+    "dev": "pnpm vp dev",
+    "build": "pnpm vp build",
+    "test": "pnpm vp test",
+    "lint": "pnpm vp lint",
+    "format": "pnpm vp fmt",
+    "typecheck": "pnpm vp check"
   }
 }

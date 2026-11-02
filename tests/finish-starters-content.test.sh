@@ -7,6 +7,8 @@ source "$DIR/tests/lib.sh"
 PAIRS=(
   "web-ts|Vite"
   "node-api|Fastify"
+  "web-ts|vp check"
+  "node-api|vp check"
   "audio-app|ScopedNoDenormals"
   "web-audio|AudioWorklet"
   "audio-external|perform routine"

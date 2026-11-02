@@ -18,6 +18,11 @@ claude-starters` → `/plugin update claude-starters`).
   golden buffers stay reproducible.
 - **`clean-code-rust`:** return iterators instead of collecting; validated
   newtypes.
+- **`web-ts` and `node-api` move to Vite+.** One `vite.config.ts` replaces the
+  ESLint + Prettier setup: `vp check` runs format, lint and type checks
+  together, `vp test` runs Vitest, and the scaffolded pre-commit hook runs
+  `vp check --fix` on staged files. `vp migrate` converts existing projects.
+  `node-api` keeps `tsc` for its server build.
 
 ## 1.2.0
 - **Plugin configuration:** `userConfig` declares two boolean opt-outs, prompted
