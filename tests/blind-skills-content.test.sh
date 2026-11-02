@@ -5,6 +5,7 @@ source "$DIR/tests/lib.sh"
 
 # skill|signature token
 PAIRS=(
+  "clean-code-core|level of abstraction"
   "clean-code-rust|thiserror"
   "clean-code-go|goroutine"
   "clean-code-python|pathlib"

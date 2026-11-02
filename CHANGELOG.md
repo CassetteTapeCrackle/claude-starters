@@ -4,6 +4,21 @@ Bump `version` in `.claude-plugin/plugin.json` on every release — that's the
 signal Claude Code uses to offer an update (`/plugin marketplace update
 claude-starters` → `/plugin update claude-starters`).
 
+## Unreleased
+- **`clean-code-core` ships with the plugin.** The language-agnostic base the
+  `clean-code-<lang>` skills build on was only in a local config; now it is in
+  `skills/`. It gains function-design rules: one level of abstraction per
+  body, honest signatures (I/O, clocks and randomness passed in from the top),
+  asking for the least you need, thin framework callbacks, `<values>_by_<key>`
+  map names, and a Types section (types that can only be built valid).
+- **`clean-code-cpp`:** standard algorithms over raw loops, callbacks or ranges
+  over huge result vectors, invariant wrapper types, and locks passed as
+  receipts for call-order rules.
+- **`clean-code-audio`:** `processBlock` as a thin dispatcher; seeded RNGs so
+  golden buffers stay reproducible.
+- **`clean-code-rust`:** return iterators instead of collecting; validated
+  newtypes.
+
 ## 1.2.0
 - **Plugin configuration:** `userConfig` declares two boolean opt-outs, prompted
   when the plugin is enabled and changeable from `/plugin` — no hand-editing
