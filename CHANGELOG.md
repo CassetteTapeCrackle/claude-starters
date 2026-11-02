@@ -4,6 +4,13 @@ Bump `version` in `.claude-plugin/plugin.json` on every release — that's the
 signal Claude Code uses to offer an update (`/plugin marketplace update
 claude-starters` → `/plugin update claude-starters`).
 
+## Unreleased
+- **`web-ts` and `node-api` move to Vite+.** One `vite.config.ts` replaces the
+  ESLint + Prettier setup: `vp check` runs format, lint and type checks
+  together, `vp test` runs Vitest, and the scaffolded pre-commit hook runs
+  `vp check --fix` on staged files. `vp migrate` converts existing projects.
+  `node-api` keeps `tsc` for its server build.
+
 ## 1.2.0
 - **Plugin configuration:** `userConfig` declares two boolean opt-outs, prompted
   when the plugin is enabled and changeable from `/plugin` — no hand-editing

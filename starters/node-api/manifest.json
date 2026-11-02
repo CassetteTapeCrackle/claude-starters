@@ -7,8 +7,9 @@
   "commands": {
     "dev": "pnpm dev",
     "build": "pnpm build",
-    "test": "pnpm test",
-    "lint": "pnpm lint",
-    "typecheck": "pnpm tsc --noEmit"
+    "test": "pnpm vp test",
+    "lint": "pnpm vp lint",
+    "format": "pnpm vp fmt",
+    "typecheck": "pnpm vp check"
   }
 }
